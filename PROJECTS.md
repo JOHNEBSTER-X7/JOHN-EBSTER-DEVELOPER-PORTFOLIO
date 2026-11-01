@@ -162,3 +162,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate GP/LP onboarding, fund and SPV setup, subscriptions, commitments, capital calls, portfolio valuations, NAV, simplified distributions and carried-interest calculations, investor statements and audit history.  
 **Status:** Prototype published; 19 automated tests, TypeScript check and build passed in GitHub Actions. All records are synthetic; no bank, custodian, legal or regulatory integrations.
+
+
+### Northstar Institutional Private Credit, Lending & Loan Syndication Platform
+**Path:** [projects/fintech/private-credit-loan-syndication](./projects/fintech/private-credit-loan-syndication/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate borrower/lender onboarding, credit applications, facility syndication, drawdowns, repayment schedules, collateral registers and covenant monitoring.  
+**Status:** Portfolio prototype published; CI verification pending. All records and operations are simulated; no real lending, bank or payment integrations.
