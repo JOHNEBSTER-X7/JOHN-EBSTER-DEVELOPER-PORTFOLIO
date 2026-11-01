@@ -57,3 +57,5 @@ For professional enquiries, contact me through my GitHub profile: [github.com/JO
 | [Northstar Cloud Infrastructure & DevOps](./projects/devops/cloud-infrastructure-platform/) | TypeScript / Docker / Kubernetes / CI/CD | Prototype; 13 tests, TypeScript build and AWS Terraform validation passed in GitHub Actions; AWS deployment workflow prepared, not yet activated |
 
 | [Northstar FinTech Ledger & Reconciliation](./projects/fintech/ledger-reconciliation-platform/) | TypeScript / Express / Double-entry ledger / Reconciliation | Prototype; 11 tests, type-check and build passed in GitHub Actions |
+
+| [Northstar Enterprise Banking & Payments API](./projects/fintech/banking-payments-api/) | TypeScript / Express / Payments / KYC workflow / Risk | Prototype; 12 tests, type-check and build passed in GitHub Actions |
