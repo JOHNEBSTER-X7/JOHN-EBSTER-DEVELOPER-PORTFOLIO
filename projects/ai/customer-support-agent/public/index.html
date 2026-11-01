@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Northstar AI customer support demo">
+  <title>Northstar Support | Help Centre</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-mark">N</div>
+      <div><strong>Northstar Support</strong><span>Customer help centre</span></div>
+      <span class="online"><i></i> Online</span>
+    </header>
+    <section class="intro">
+      <p class="eyebrow">SUPPORT ASSISTANT</p>
+      <h1>How can we help today?</h1>
+      <p>Ask a question and I'll look for an answer in our help centre.</p>
+    </section>
+    <section class="chat-card" aria-label="Support conversation">
+      <div class="chat-heading"><div><strong>Northstar Assistant</strong><small>Knowledge-base support</small></div><button id="new-chat" class="quiet">New chat</button></div>
+      <div id="messages" class="messages" aria-live="polite">
+        <div class="bubble assistant"><span class="bubble-label">NORTHSTAR ASSISTANT</span>Hello! I can help with orders, returns, payments and account access. What would you like to know?</div>
+      </div>
+      <div class="suggestions">
+        <button data-question="How can I track my order?">Track an order</button>
+        <button data-question="What is your returns policy?">Returns policy</button>
+        <button data-question="Which payment methods do you accept?">Payment methods</button>
+      </div>
+      <form id="chat-form" class="composer">
+        <label class="sr-only" for="message">Your message</label>
+        <input id="message" name="message" maxlength="2000" placeholder="Type your question..." autocomplete="off" required>
+        <button type="submit" id="send">Send <span>→</span></button>
+      </form>
+      <p class="privacy-note">Demo only. Never share passwords, card numbers or security codes.</p>
+    </section>
+    <section id="escalation" class="escalation hidden">
+      <h2>Would you like a human specialist?</h2>
+      <p>Send a demo escalation request with your contact email and a short summary.</p>
+      <form id="escalation-form">
+        <label>Email address<input name="email" type="email" maxlength="254" required placeholder="you@example.com"></label>
+        <label>What do you need help with?<textarea name="summary" minlength="10" maxlength="2000" required placeholder="Briefly describe the issue..."></textarea></label>
+        <button type="submit">Submit request</button>
+      </form>
+      <p id="escalation-result" role="status"></p>
+    </section>
+    <footer>Northstar Support Agent · Portfolio demonstration</footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
