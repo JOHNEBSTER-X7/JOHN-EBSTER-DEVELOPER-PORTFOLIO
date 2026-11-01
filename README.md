@@ -63,3 +63,5 @@ For professional enquiries, contact me through my GitHub profile: [github.com/JO
 | [Northstar Digital Asset Tokenisation](./projects/web3/digital-asset-tokenisation/) | Solidity / OpenZeppelin / Hardhat / TypeScript / Event indexing | Prototype; 8 smart-contract tests, 4 indexer tests, type-check and build passed in GitHub Actions |
 
 | [Northstar Institutional DeFi & Liquidity](./projects/web3/institutional-defi-liquidity/) | Solidity / AMM / Lending / Liquidations / TypeScript | Prototype; 10 smart-contract tests, 4 indexer tests, type-check and build passed in GitHub Actions |
+
+| [Northstar Institutional Digital Asset Exchange](./projects/fintech/digital-asset-exchange/) | TypeScript / Matching engine / Order book / Market data | Prototype; automated verification pending |
