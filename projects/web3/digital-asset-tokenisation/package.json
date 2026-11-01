@@ -1,0 +1,8 @@
+{
+  "name":"northstar-digital-asset-tokenisation",
+  "version":"1.0.0",
+  "private":true,
+  "scripts":{"compile":"hardhat compile","test":"hardhat test","typecheck":"tsc --noEmit","build":"tsc"},
+  "devDependencies":{"@nomicfoundation/hardhat-toolbox":"^5.0.0","@types/express":"^5.0.0","@types/node":"^22.13.10","@types/supertest":"^6.0.2","hardhat":"^2.22.19","supertest":"^7.0.0","ts-node":"^10.9.2","typescript":"^5.8.2","vitest":"^3.0.8"},
+  "dependencies":{"@openzeppelin/contracts":"^5.2.0","express":"^4.21.2","zod":"^3.24.2"}
+}
