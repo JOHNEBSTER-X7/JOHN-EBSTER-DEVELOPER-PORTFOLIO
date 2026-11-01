@@ -61,3 +61,5 @@ For professional enquiries, contact me through my GitHub profile: [github.com/JO
 | [Northstar Enterprise Banking & Payments API](./projects/fintech/banking-payments-api/) | TypeScript / Express / Payments / KYC workflow / Risk | Prototype; 12 tests, type-check and build passed in GitHub Actions |
 
 | [Northstar Digital Asset Tokenisation](./projects/web3/digital-asset-tokenisation/) | Solidity / OpenZeppelin / Hardhat / TypeScript / Event indexing | Prototype; 8 smart-contract tests, 4 indexer tests, type-check and build passed in GitHub Actions |
+
+| [Northstar Institutional DeFi & Liquidity](./projects/web3/institutional-defi-liquidity/) | Solidity / AMM / Lending / Liquidations / TypeScript | Educational prototype; CI verification pending |
