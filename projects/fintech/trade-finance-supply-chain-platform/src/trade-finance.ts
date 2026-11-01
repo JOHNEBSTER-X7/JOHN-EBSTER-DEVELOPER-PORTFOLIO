@@ -31,8 +31,8 @@ export class TradeFinance {
  listParties(){return [...this.parties.values()].map(p=>({...p}));}
  private risk(input:{type:FinanceType;amountMinor:number;applicant:Party;counterparty:Party;documents:TradeDocument[]}){
   let score=15;const factors:string[]=[];
-  if(input.amountMinor>10_000_000){score+=25;factors.push("Large requested facility");}
-  else if(input.amountMinor>2_500_000){score+=12;factors.push("Medium-sized requested facility");}
+  if(input.amountMinor>10_000_000){score+=55;factors.push("Large requested facility");}
+  else if(input.amountMinor>2_500_000){score+=20;factors.push("Medium-sized requested facility");}
   if(input.applicant.country!==input.counterparty.country){score+=10;factors.push("Cross-border transaction");}
   if(input.applicant.role==="importer"&&input.counterparty.role!=="exporter"){score+=20;factors.push("Counterparty role does not match importer trade flow");}
   if(input.applicant.role==="exporter"&&input.counterparty.role!=="importer"){score+=20;factors.push("Counterparty role does not match exporter trade flow");}
