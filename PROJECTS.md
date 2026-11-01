@@ -126,4 +126,4 @@ A project only advances to a stronger status when evidence is available.
 **Path:** [projects/fintech/treasury-risk-platform](./projects/fintech/treasury-risk-platform/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate multi-currency treasury positions, dated liquidity forecasts, GBP FX exposure, scenario stress tests, counterparty limits and maker-checker transaction approvals.  
-**Status:** Portfolio prototype published; CI verification pending. Uses synthetic balances and illustrative static FX rates; not connected to banks or live markets.
+**Status:** Prototype published; 13 automated tests, TypeScript check and build passed in GitHub Actions. Uses synthetic balances and illustrative static FX rates; not connected to banks or live markets.
