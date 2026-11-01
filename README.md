@@ -50,3 +50,7 @@ Each project is self-contained. Follow its README for prerequisites, installatio
 ## Contact
 
 For professional enquiries, contact me through my GitHub profile: [github.com/JOHNEBSTER-X7](https://github.com/JOHNEBSTER-X7).
+
+
+| [Northstar Enterprise Research & Intelligence](./projects/ai/enterprise-research-intelligence/) | TypeScript / Express / Research / RAG | Prototype; TypeScript check, 12 tests and build passed in CI |
+| [Northstar Enterprise Business Operations](./projects/full-stack/business-operations-platform/) | TypeScript / Express / CRM / Workflow automation | Prototype; CI verification pending |
