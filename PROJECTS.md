@@ -154,4 +154,4 @@ A project only advances to a stronger status when evidence is available.
 **Path:** [projects/fintech/digital-securities-capital-markets](./projects/fintech/digital-securities-capital-markets/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate issuer and investor eligibility, equity/bond instrument registration, primary allocations, secondary limit-order matching, simulated settlement, custody holdings, cash distribution records and audit events.  
-**Status:** Portfolio prototype published; CI verification pending. All securities and transactions are synthetic; no regulated market or custody integration.
+**Status:** Prototype published; 18 automated tests, TypeScript check and build passed in GitHub Actions. All securities and transactions are synthetic; no regulated market or custody integration.
