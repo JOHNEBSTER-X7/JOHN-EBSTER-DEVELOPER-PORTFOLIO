@@ -161,4 +161,4 @@ A project only advances to a stronger status when evidence is available.
 **Path:** [projects/fintech/private-equity-fund-administration](./projects/fintech/private-equity-fund-administration/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate GP/LP onboarding, fund and SPV setup, subscriptions, commitments, capital calls, portfolio valuations, NAV, simplified distributions and carried-interest calculations, investor statements and audit history.  
-**Status:** Portfolio prototype published; CI verification pending. All records are synthetic; no bank, custodian, legal or regulatory integrations.
+**Status:** Prototype published; 19 automated tests, TypeScript check and build passed in GitHub Actions. All records are synthetic; no bank, custodian, legal or regulatory integrations.
