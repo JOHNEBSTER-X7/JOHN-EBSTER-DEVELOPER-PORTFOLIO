@@ -1,0 +1,50 @@
+# John Ebster-Davids | Software Engineering Portfolio
+
+A practical engineering portfolio documenting projects in full-stack development, AI applications, Python services, cloud engineering, blockchain and financial technology.
+
+**GitHub:** [@JOHNEBSTER-X7](https://github.com/JOHNEBSTER-X7)
+
+> Portfolio work is presented with clear scope, implementation notes and test status. A project is not described as production-ready, audited or independently validated unless that has actually been established.
+
+## Engineering focus
+
+- **Languages:** JavaScript, TypeScript, Python, Solidity
+- **Frontend:** React, Next.js, HTML, CSS
+- **Backend:** Node.js, Express, FastAPI, REST APIs
+- **Web3:** EVM smart contracts, Solidity, Hardhat, ethers.js
+- **Data and AI:** API integrations, retrieval-augmented generation (RAG), data pipelines, explainable scoring prototypes
+- **Delivery:** Git, GitHub Actions, Docker, automated testing and technical documentation
+
+## Selected projects
+
+| Project | Area | Status |
+|---|---|---|
+| [Three-of-Five Multisignature Wallet](./projects/web3/three-of-five-multisig/) | Solidity / Web3 security | Prototype; test status documented in project |
+| [Market Intelligence API](./projects/python/market-intelligence-api/) | Python / FastAPI | Prototype using illustrative sample data |
+| [DRAGO X Protocol](https://github.com/JOHNEBSTER-X7/DRAGO_X_PROTOCOL_FC) | Solidity / digital-asset infrastructure | Separate project repository |
+
+Project folders include their own README files, setup instructions, architecture notes and limitations. See [PROJECTS.md](./PROJECTS.md) for the portfolio index.
+
+## Quality principles
+
+1. Make the problem and intended users explicit.
+2. Document architecture and important design decisions.
+3. Include automated tests and report what has actually been run.
+4. Identify security, data quality and operational limitations.
+5. Keep secrets out of source control; use environment variables and example files.
+6. Improve projects through traceable commits and reviewable changes.
+
+## Running projects
+
+Each project is self-contained. Follow its README for prerequisites, installation, configuration and test commands. Do not assume all projects share the same runtime or dependencies.
+
+## Roadmap
+
+- Build and validate the first Web3 and Python portfolio projects.
+- Add full-stack applications with API integration and database persistence.
+- Add AI/RAG and cloud deployment case studies.
+- Attach test reports, diagrams, screenshots and live demos only when available and verified.
+
+## Contact
+
+For professional enquiries, contact me through my GitHub profile: [github.com/JOHNEBSTER-X7](https://github.com/JOHNEBSTER-X7).
