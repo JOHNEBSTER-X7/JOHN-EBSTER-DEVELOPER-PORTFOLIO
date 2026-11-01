@@ -92,3 +92,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate double-entry journal posting, account balances, idempotency, currency validation, and statement-reference reconciliation.  
 **Status:** Prototype published; 11 automated tests, TypeScript check and production build passed in GitHub Actions. In-memory only; does not process real payments or hold funds.
+
+
+### Northstar Enterprise Banking & Payments API
+**Path:** [projects/fintech/banking-payments-api](./projects/fintech/banking-payments-api/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate customer and merchant onboarding, simulated KYC review, payment lifecycle, idempotency, risk scoring, refunds, chargeback disputes and compliance alert handling.  
+**Status:** Prototype published; 12 automated tests, TypeScript check and production build passed in GitHub Actions. All money movement and identity review are simulated; no real payment processing or KYC verification is connected.
