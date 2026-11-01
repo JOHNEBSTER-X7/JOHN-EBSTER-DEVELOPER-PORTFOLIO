@@ -1,0 +1,22 @@
+import {beforeEach,describe,expect,it} from "vitest";
+import request from "supertest";
+import {app} from "../src/app";
+import {reset} from "../src/store";
+import {readinessChecks} from "../src/deployment";
+import type {Service} from "../src/types";
+const healthy:Service={id:"svc",name:"Service",description:"Demo",owner:"Platform",health:"healthy",version:"1.0.0"};
+beforeEach(()=>reset());
+describe("Cloud deployment control plane",()=>{
+ it("exposes health and dashboard",async()=>{expect((await request(app).get("/api/health")).body.status).toBe("ok");expect((await request(app).get("/api/dashboard")).body.metrics.services).toBe(3);});
+ it("lists service catalogue",async()=>{expect((await request(app).get("/api/services")).body.length).toBe(3);});
+ it("accepts a valid semantic version",()=>{expect(readinessChecks(healthy,"staging","2.0.1")).toEqual([]);});
+ it("rejects an invalid semantic version",()=>{expect(readinessChecks(healthy,"staging","latest").length).toBeGreaterThan(0);});
+ it("blocks unhealthy services",()=>{expect(readinessChecks({...healthy,health:"degraded"},"staging","1.1.0")).toContain("Service health is not healthy.");});
+ it("creates deployment in pending approval",async()=>{const r=await request(app).post("/api/deployments").send({serviceId:"api-gateway",environment:"staging",version:"2.0.0",requestedBy:"Release manager"});expect(r.status).toBe(201);expect(r.body.status).toBe("pending_approval");});
+ it("rejects unknown service",async()=>{expect((await request(app).post("/api/deployments").send({serviceId:"missing",environment:"staging",version:"1.0.0",requestedBy:"Ops"})).status).toBe(404);});
+ it("rejects invalid deployment payload",async()=>{expect((await request(app).post("/api/deployments").send({serviceId:"api-gateway",environment:"production",version:"latest",requestedBy:"x"})).status).toBe(400);});
+ it("requires approval before execute",async()=>{const d=(await request(app).post("/api/deployments").send({serviceId:"api-gateway",environment:"staging",version:"2.0.0",requestedBy:"Ops"})).body;expect((await request(app).post("/api/deployments/"+d.id+"/execute")).status).toBe(409);});
+ it("approves and executes a simulated deployment",async()=>{const d=(await request(app).post("/api/deployments").send({serviceId:"api-gateway",environment:"staging",version:"2.1.0",requestedBy:"Ops"})).body;expect((await request(app).post("/api/deployments/"+d.id+"/approval").send({decision:"approved"})).body.status).toBe("approved");expect((await request(app).post("/api/deployments/"+d.id+"/execute")).body.status).toBe("deployed");});
+ it("does not allow duplicate approval decisions",async()=>{const d=(await request(app).post("/api/deployments").send({serviceId:"api-gateway",environment:"staging",version:"2.0.0",requestedBy:"Ops"})).body;await request(app).post("/api/deployments/"+d.id+"/approval").send({decision:"rejected"});expect((await request(app).post("/api/deployments/"+d.id+"/approval").send({decision:"approved"})).status).toBe(409);});
+ it("returns 404 for missing deployment",async()=>{expect((await request(app).get("/api/deployments/nope")).status).toBe(404);});
+});
