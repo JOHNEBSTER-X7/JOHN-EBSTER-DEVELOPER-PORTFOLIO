@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Northstar | Banking Operations Command Centre</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:#e9edf5;background:#0a1020;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0}header{display:flex;justify-content:space-between;align-items:center;padding:22px 4vw;border-bottom:1px solid #253149;background:#0d1528;position:sticky;top:0;z-index:2}
+.brand{font-weight:750;letter-spacing:.08em}.brand small{display:block;color:#91a0bb;font-size:10px;letter-spacing:.18em;margin-top:4px}
+.status{font-size:12px;color:#b6c5dd}.status:before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#52d6a0;margin-right:8px}
+main{max-width:1440px;margin:auto;padding:28px 4vw 60px}.intro{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:22px}.eyebrow{color:#86a4d5;font-size:11px;letter-spacing:.18em;text-transform:uppercase}h1{font-size:clamp(24px,3vw,36px);margin:8px 0 5px}.muted{color:#93a1b8;font-size:13px}.refresh{border:1px solid #33425e;border-radius:8px;background:#15213a;color:#eaf0fa;padding:10px 14px;cursor:pointer}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin:20px 0}.card,.panel{background:#111c31;border:1px solid #273650;border-radius:12px}.card{padding:16px}.card .label{font-size:11px;color:#9eacc2}.card strong{display:block;font-size:28px;margin-top:10px}.card em{font-size:11px;color:#8294b1;font-style:normal}
+.grid{display:grid;grid-template-columns:1.25fr .9fr;gap:14px}.panel{padding:18px;margin-bottom:14px;min-width:0}.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.panel h2{font-size:15px;margin:0}.tag{font-size:10px;border:1px solid #354665;padding:4px 7px;border-radius:20px;color:#9fb1ce}
+.bars{display:flex;gap:8px;align-items:end;height:115px;padding:8px 0 0}.bar{flex:1;min-width:20px;background:linear-gradient(180deg,#74a8ff,#345b9b);border-radius:5px 5px 0 0;position:relative}.bar span{position:absolute;top:-20px;left:0;right:0;text-align:center;font-size:10px;color:#aebbd0}.bar-labels{display:flex;justify-content:space-around;color:#8292ad;font-size:10px;margin-top:7px}
+table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;color:#8295b4;font-weight:500;padding:10px 8px;border-bottom:1px solid #293750}td{padding:11px 8px;border-bottom:1px solid #202d44;color:#d7dfec}tr:last-child td{border-bottom:0}.pill{display:inline-block;border-radius:20px;padding:4px 7px;font-size:10px;background:#26344c;color:#c7d5e9}.critical,.high{background:#512c3c;color:#ffb7c2}.medium{background:#4b4026;color:#f3d58e}.low,.settled,.completed{background:#1d463d;color:#8ee1c0}.new{background:#4a3328;color:#ffc28d}
+.actions{display:flex;gap:5px;flex-wrap:wrap}.actions button{font-size:10px;padding:5px 7px;background:#1d2c47;color:#cbd8ec;border:1px solid #3a4b69;border-radius:6px;cursor:pointer}.actions button:hover,.refresh:hover{background:#263a5d}
+.alert-list{display:grid;gap:9px}.alert{padding:11px;border:1px solid #283750;border-radius:9px}.alert-top{display:flex;justify-content:space-between;gap:8px}.alert strong{font-size:12px}.alert p{font-size:11px;color:#98a8c1;margin:7px 0}.alert-foot{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.liquidity{display:grid;gap:13px}.liq-row{display:grid;grid-template-columns:1fr auto;gap:8px;font-size:12px}.track{height:7px;background:#26354e;border-radius:10px;overflow:hidden;grid-column:1/3}.fill{height:100%;background:#65cba5}.fill.warn{background:#e5a45e}
+.activity{display:grid;gap:12px}.event{display:grid;grid-template-columns:10px 1fr auto;gap:9px;font-size:11px;color:#b8c5d8}.dot{width:7px;height:7px;border-radius:50%;background:#78a8ed;margin-top:4px}.event time{color:#7e90ad}
+footer{color:#7889a5;font-size:10px;text-align:center;padding:22px 0 0}
+@media(max-width:1100px){.kpis{grid-template-columns:repeat(3,1fr)}}@media(max-width:760px){header{padding:17px 5vw}.intro{align-items:start;flex-direction:column}.kpis{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}.panel{overflow:auto}table{min-width:540px}}
+</style></head>
+<body>
+<header><div class="brand">NORTHSTAR<small>INSTITUTIONAL BANKING OPERATIONS</small></div><div class="status">DEMO ENVIRONMENT · SYNTHETIC DATA</div></header>
+<main>
+<section class="intro"><div><div class="eyebrow">Operations intelligence / Overview</div><h1>Banking Operations Command Centre</h1><div class="muted">A consolidated view of payments, liquidity, financial crime alerts and operational work.</div></div><button class="refresh" id="refresh">↻ Refresh dashboard</button></section>
+<section class="kpis" id="kpis"><div class="card"><div class="label">Payments today</div><strong>—</strong></div></section>
+<div class="grid">
+<div>
+<section class="panel"><div class="panel-head"><h2>Payment operations</h2><span class="tag">LIVE SIMULATION</span></div><div class="bars" id="paymentBars"></div><div class="bar-labels"><span>Settled</span><span>In transit</span><span>Queued</span><span>Screening</span><span>Returned</span></div></section>
+<section class="panel"><div class="panel-head"><h2>Recent payment instructions</h2><span class="tag">5 RECORDS</span></div><table><thead><tr><th>Reference</th><th>Counterparty</th><th>Amount</th><th>Rail</th><th>Status</th></tr></thead><tbody id="payments"></tbody></table></section>
+<section class="panel"><div class="panel-head"><h2>Operational work queue</h2><span class="tag">CASE OWNERSHIP</span></div><table><thead><tr><th>Work item</th><th>Domain</th><th>Priority</th><th>Status</th><th>Action</th></tr></thead><tbody id="work"></tbody></table></section>
+</div>
+<div>
+<section class="panel"><div class="panel-head"><h2>Priority alerts</h2><span class="tag">HUMAN REVIEW</span></div><div class="alert-list" id="alerts"></div></section>
+<section class="panel"><div class="panel-head"><h2>Treasury liquidity</h2><span class="tag">AVAILABLE BALANCES</span></div><div class="liquidity" id="liquidity"></div></section>
+<section class="panel"><div class="panel-head"><h2>Operational activity</h2><span class="tag">RECENT EVENTS</span></div><div class="activity" id="activity"></div></section>
+</div>
+</div>
+<footer>Northstar portfolio prototype · No live bank, payment network, AML provider or settlement integration · Values are synthetic and illustrative.</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const money=(n,c)=>new Intl.NumberFormat("en-GB",{style:"currency",currency:c,maximumFractionDigits:2}).format(n/100);
+const pill=(s)=>'<span class="pill '+String(s).toLowerCase()+'">'+String(s).replaceAll("_"," ")+'</span>';
+async function get(p){const r=await fetch("/api/"+p);if(!r.ok)throw new Error("Unable to load "+p);return r.json()}
+async function action(url,body){const r=await fetch("/api/"+url,{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify(body)});const d=await r.json();if(!r.ok)throw new Error(d.error||"Action failed");return d}
+function renderDashboard(d){
+ const k=d.kpis;$("kpis").innerHTML=[["Payments today",k.paymentsToday,"Instructions in demo feed"],["Payments in flight",k.paymentsInFlight,"Queued, screening or in transit"],["Open alerts",k.openAlerts,"Require workflow attention"],["Critical alerts",k.criticalAlerts,"Highest priority indicators"],["Open work items",k.openWorkItems,"Across operational domains"],["Liquidity below buffer",k.liquidityAccountsBelowBuffer,"Accounts below configured threshold"]].map(x=>'<div class="card"><div class="label">'+x[0]+'</div><strong>'+x[1]+'</strong><em>'+x[2]+'</em></div>').join("");
+ const vals=[["Settled",d.paymentStatus.settled],["In transit",d.paymentStatus.inTransit],["Queued",d.paymentStatus.queued],["Screening",d.paymentStatus.screening],["Returned",d.paymentStatus.returned]],max=Math.max(1,...vals.map(v=>v[1]));
+ $("paymentBars").innerHTML=vals.map(v=>'<div class="bar" style="height:'+Math.max(6,v[1]/max*90)+'px"><span>'+v[1]+'</span></div>').join("");
+ $("liquidity").innerHTML=d.liquidity.map(a=>{const pct=Math.max(0,Math.min(100,(a.availableMinor/a.balanceMinor)*100));return '<div class="liq-row"><span>'+a.account+' · '+a.currency+'</span><strong>'+money(a.availableMinor,a.currency)+'</strong><div class="track"><div class="fill '+(a.belowBuffer?'warn':'')+'" style="width:'+pct+'%"></div></div></div>'}).join("");
+}
+async function render(){
+ try{
+ const [d,p,a,w,e]=await Promise.all([get("dashboard"),get("payments"),get("alerts"),get("work-items"),get("activity")]);renderDashboard(d);
+ $("payments").innerHTML=p.map(x=>'<tr><td>'+x.reference+'</td><td>'+x.counterparty+'</td><td>'+money(x.amountMinor,x.currency)+'</td><td>'+x.rail+'</td><td>'+pill(x.status)+'</td></tr>').join("");
+ $("alerts").innerHTML=a.map(x=>'<div class="alert"><div class="alert-top"><strong>'+x.title+'</strong>'+pill(x.severity)+'</div><p>'+x.description+'</p><div class="alert-foot"><span class="muted">'+x.reference+' · '+x.status+'</span><div class="actions">'+(x.status==="resolved"?"":'<button data-alert="'+x.id+'" data-action="acknowledge">Acknowledge</button><button data-alert="'+x.id+'" data-action="investigate">Investigate</button><button data-alert="'+x.id+'" data-action="escalate">Escalate</button><button data-alert="'+x.id+'" data-action="resolve">Resolve</button>')+'</div></div></div>').join("");
+ $("work").innerHTML=w.map(x=>'<tr><td>'+x.title+'</td><td>'+x.domain+'</td><td>'+pill(x.priority)+'</td><td>'+pill(x.status)+'</td><td><div class="actions">'+(x.status==="completed"?"":'<button data-work="'+x.id+'" data-status="in_progress">Start</button><button data-work="'+x.id+'" data-status="completed">Complete</button>')+'</div></td></tr>').join("");
+ $("activity").innerHTML=e.slice(0,9).map(x=>'<div class="event"><span class="dot"></span><span><strong>'+x.action+'</strong><br>'+x.detail+'</span><time>'+new Date(x.at).toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})+'</time></div>').join("");
+ }catch(err){$("alerts").innerHTML='<p class="muted">'+err.message+'</p>'}
+}
+document.addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)return;try{if(b.dataset.alert){await action("alerts/"+b.dataset.alert+"/actions",{action:b.dataset.action,actor:"command-centre-operator",note:"Action recorded in demo workflow"});await render()}if(b.dataset.work){await action("work-items/"+b.dataset.work+"/status",{status:b.dataset.status,actor:"operations-operator"});await render()}}catch(err){alert(err.message)}});
+$("refresh").addEventListener("click",render);render();setInterval(render,30000);
+</script></body></html>
