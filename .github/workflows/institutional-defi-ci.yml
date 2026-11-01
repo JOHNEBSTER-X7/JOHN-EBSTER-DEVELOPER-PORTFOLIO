@@ -1,0 +1,39 @@
+name: Institutional DeFi CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "projects/web3/institutional-defi-liquidity/**"
+      - ".github/workflows/institutional-defi-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "projects/web3/institutional-defi-liquidity/**"
+      - ".github/workflows/institutional-defi-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/web3/institutional-defi-liquidity
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install dependencies
+        run: npm install
+      - name: Compile Solidity contracts
+        run: npm run compile
+      - name: Run smart-contract and indexer tests
+        run: npm test
+      - name: Type-check TypeScript
+        run: npm run typecheck
+      - name: Build TypeScript
+        run: npm run build
