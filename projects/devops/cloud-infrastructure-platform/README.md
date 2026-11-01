@@ -8,7 +8,7 @@ A cloud operations and deployment control-plane portfolio project. It demonstrat
 - Semantic-version and service-health readiness policies.
 - Deployment request and approval state machine.
 - Human approval required before simulated execution.
-- Deployment history, operational events and dashboard metrics.\n- Prometheus-compatible metrics endpoint (`/api/metrics`) and example scrape configuration.
+- Deployment history, operational events and dashboard metrics.\n- Prometheus-compatible metrics endpoint at /api/metrics and example scrape configuration.\n- AWS Terraform foundation for ECR, VPC, ALB, ECS Fargate and CloudWatch.\n- Manually triggered GitHub Actions deployment using GitHub OIDC and protected environment approval.\n- Prometheus-compatible metrics endpoint (`/api/metrics`) and example scrape configuration.
 - Multi-stage Dockerfile, Compose configuration and Kubernetes Deployment/Service manifests.
 - Express API, TypeScript, Zod and Vitest.
 
@@ -53,9 +53,9 @@ See infra/kubernetes/deployment.yaml. Replace the sample image reference with yo
 | POST | /api/deployments/:id/approval | Approve or reject |
 | POST | /api/deployments/:id/execute | Simulate an approved release |
 
-## Important scope boundary
+## AWS deployment foundation\n\nSee infra/aws and docs/AWS_DEPLOYMENT_CHECKLIST.md. The Terraform configuration is validated in GitHub Actions. The AWS workflow is manual-only and requires an AWS account, pre-created encrypted/versioned S3 state bucket, GitHub OIDC IAM role, and GitHub Environment secrets. It is not a live deployment until those are configured and the workflow has been run successfully. The example uses HTTP; configure HTTPS/TLS and review security before production. AWS resources are billable; review pricing and teardown instructions.\n\n## Important scope boundary
 
-The deployment execution endpoint simulates a successful release in the local in-memory control plane. It does not connect to AWS, Azure, GCP, Kubernetes or a production environment. The Kubernetes YAML is a reference manifest, not proof of a running cluster. No cloud credentials are required or stored.
+The deployment execution endpoint simulates a successful release in the local in-memory control plane. The local demo execution does not connect to a cloud environment. AWS deployment is available as an infrastructure-as-code workflow but has not been activated against a real account. The Kubernetes YAML is a reference manifest, not proof of a running cluster. No cloud credentials are required or stored.
 
 ## Production engineering still required
 
