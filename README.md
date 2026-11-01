@@ -79,3 +79,5 @@ For professional enquiries, contact me through my GitHub profile: [github.com/JO
 | [Northstar Institutional Private Equity, Venture Capital & Fund Administration](./projects/fintech/private-equity-fund-administration/) | TypeScript / GP-LP / Capital calls / NAV / Fund waterfalls | Prototype; 19 tests, type-check and build passed in GitHub Actions |
 
 | [Northstar Institutional Private Credit & Loan Syndication](./projects/fintech/private-credit-loan-syndication/) | TypeScript / Credit origination / Syndication / Loan servicing / Covenants | Prototype; 8 tests, type-check and build passed in GitHub Actions |
+
+| [Northstar Institutional Payments, Cross-Border Settlement & Treasury Infrastructure](./projects/fintech/cross-border-payments-settlement-platform/) | TypeScript / Express / FX / ISO 20022-style messaging / Settlement / Reconciliation | Prototype published; CI verification pending. All payment rails, screening, FX and settlement are simulated. |
