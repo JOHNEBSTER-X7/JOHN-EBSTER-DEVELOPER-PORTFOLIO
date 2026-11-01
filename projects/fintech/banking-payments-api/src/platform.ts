@@ -38,7 +38,7 @@ export class BankingPlatform {
   private scoreRisk(amountCents: number, customer: Party, merchant: Party): {score:number; level:RiskLevel; reasons:string[]} {
     let score = 5;
     const reasons: string[] = [];
-    if (amountCents >= 1_000_000) { score += 55; reasons.push("High-value transaction threshold reached."); }
+    if (amountCents >= 1_000_000) { score += 70; reasons.push("High-value transaction threshold reached."); }
     if (customer.country !== merchant.country) { score += 25; reasons.push("Cross-border transaction."); }
     if (amountCents >= 500_000 && amountCents < 1_000_000) { score += 20; reasons.push("Elevated transaction value."); }
     score = Math.min(score, 100);
