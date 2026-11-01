@@ -112,4 +112,4 @@ A project only advances to a stronger status when evidence is available.
 **Path:** [projects/web3/institutional-defi-liquidity](./projects/web3/institutional-defi-liquidity/)  
 **Stack:** Solidity 0.8.24, OpenZeppelin, Hardhat, ethers, TypeScript, Express, Vitest  
 **Goal:** Demonstrate a constant-product AMM, LP shares, fee-bearing swaps, collateralised borrowing, oracle-based health checks, liquidation and chain-event ingestion.  
-**Status:** Educational prototype published; automated verification is running. Not audited and not suitable for real funds.
+**Status:** Prototype published; 10 smart-contract tests, 4 indexer tests, Solidity compilation, TypeScript check and build passed in GitHub Actions. Not audited and not suitable for real funds.
