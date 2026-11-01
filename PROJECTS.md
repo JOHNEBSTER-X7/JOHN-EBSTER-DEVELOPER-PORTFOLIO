@@ -190,3 +190,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest, responsive HTML/CSS/JavaScript dashboard  
 **Goal:** Consolidate synthetic payments, treasury liquidity, fraud/AML alerts, reconciliation exceptions and operational work queues into one management view, with alert actions, task ownership, audit events and a documented integration roadmap.  
 **Status:** Prototype published; 23 automated tests, TypeScript check and build passed in GitHub Actions. It is a standalone fixture-backed dashboard; independent portfolio systems are not connected.
+
+
+### Northstar Banking Integration Gateway & Event Bus
+Path: `projects/fintech/banking-integration-gateway/`  
+Stack: TypeScript, Express, Zod, Vitest and Supertest.  
+Scope: Authenticated domain event ingestion, versioned contracts, idempotency, simulated routing, retry/dead-letter handling and audit records.  
+Status: Prototype published; CI verification pending. No external services are connected.
