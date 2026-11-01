@@ -67,3 +67,5 @@ For professional enquiries, contact me through my GitHub profile: [github.com/JO
 | [Northstar Institutional Digital Asset Exchange](./projects/fintech/digital-asset-exchange/) | TypeScript / Matching engine / Order book / Market data | Prototype; 10 tests, type-check and build passed in GitHub Actions |
 
 | [Northstar Institutional Treasury & Risk Management](./projects/fintech/treasury-risk-platform/) | TypeScript / Treasury / FX exposure / Liquidity forecasting / Risk controls | Prototype; 13 tests, type-check and build passed in GitHub Actions |
+
+| [Northstar Institutional Trade Finance & Supply Chain Finance](./projects/fintech/trade-finance-supply-chain-platform/) | TypeScript / Trade finance / Document controls / Credit workflows | Prototype; CI verification pending |
