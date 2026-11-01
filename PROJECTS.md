@@ -82,6 +82,6 @@ A project only advances to a stronger status when evidence is available.
 
 ### Northstar Cloud Infrastructure & DevOps Platform
 **Path:** [projects/devops/cloud-infrastructure-platform](./projects/devops/cloud-infrastructure-platform/)  
-**Stack:** TypeScript, Express, Docker, Docker Compose, Kubernetes manifests, GitHub Actions  
+**Stack:** TypeScript, Express, Docker, Docker Compose, Kubernetes, Terraform, AWS ECS Fargate, ECR, ALB, CloudWatch, GitHub Actions OIDC  
 **Goal:** Demonstrate service catalogue, release readiness checks, approval-controlled deployments, operational events, containerisation and Kubernetes deployment configuration.  
-**Status:** Prototype published; TypeScript check, 12 tests and production build passed in GitHub Actions. Deployment execution is simulated; no cloud account or cluster is changed.
+**Status:** Prototype published; TypeScript check, 13 tests, production build and AWS Terraform validation passed in GitHub Actions. AWS infrastructure and gated deployment workflow are prepared; no live AWS deployment has been activated.
