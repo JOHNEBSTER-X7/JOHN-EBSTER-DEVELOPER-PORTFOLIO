@@ -1,0 +1,39 @@
+name: Banking Payments CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "projects/fintech/banking-payments-api/**"
+      - ".github/workflows/banking-payments-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "projects/fintech/banking-payments-api/**"
+      - ".github/workflows/banking-payments-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/fintech/banking-payments-api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: projects/fintech/banking-payments-api/package.json
+      - name: Install dependencies
+        run: npm install
+      - name: Type-check
+        run: npm run typecheck
+      - name: Run tests
+        run: npm test
+      - name: Build
+        run: npm run build
