@@ -71,3 +71,10 @@ Planned project area. Candidate work includes portfolio analytics, transaction r
 - **Audited:** an independent, identifiable audit report exists.
 
 A project only advances to a stronger status when evidence is available.
+
+
+### Northstar Enterprise Business Operations Platform
+**Path:** [projects/full-stack/business-operations-platform](./projects/full-stack/business-operations-platform/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest  
+**Goal:** CRM, workflow templates, task assignment, human approval gates, activity feed and operational dashboard.  
+**Status:** Initial implementation published; CI verification pending. Workflow recommendations are deterministic templates; no external business actions are executed.
