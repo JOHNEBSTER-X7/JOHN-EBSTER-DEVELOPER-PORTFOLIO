@@ -15,7 +15,7 @@ export class TradeFinance {
  private audit:AuditEvent[]=[];
  private lenders=new Map<string,{id:string;name:string;availableLimitMinor:number;currency:"GBP"|"USD"|"EUR"}>();
  constructor(){
-  this.lenders.set("lender-demo",{id:"lender-demo",name:"Northstar Demonstration Funding Desk",availableLimitMinor:50_000_000,currency:"GBP"});
+  this.lenders.set("lender-demo",{id:"lender-demo",name:"Northstar Demonstration Funding Desk",availableLimitMinor:50_000_000,currency:"GBP"});\n  this.lenders.set("lender-small",{id:"lender-small",name:"Example Limited Facility",availableLimitMinor:50_000,currency:"GBP"});
  }
  private event(entityType:string,entityId:string,action:string,actor:string,details:Record<string,string|number|boolean>={}){this.audit.push({id:randomUUID(),entityType,entityId,action,actor,timestamp:new Date().toISOString(),details});}
  onboard(input:{name:string;role:PartyRole;country:string},actor="system"){
