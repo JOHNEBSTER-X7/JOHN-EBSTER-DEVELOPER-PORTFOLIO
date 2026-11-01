@@ -1,0 +1,20 @@
+import {beforeEach,describe,it,expect} from "vitest";
+import {CommandCentreService} from "../src/service";
+describe("Banking operations command centre service",()=>{
+ let s:CommandCentreService;beforeEach(()=>{s=new CommandCentreService();});
+ it("aggregates banking operations KPIs",()=>{const d=s.dashboard();expect(d.kpis.paymentsToday).toBe(5);expect(d.kpis.openAlerts).toBe(4);expect(d.kpis.criticalAlerts).toBe(1);});
+ it("aggregates payment lifecycle counts",()=>{const d=s.dashboard();expect(d.paymentStatus.settled).toBe(1);expect(d.paymentStatus.inTransit).toBe(1);expect(d.paymentStatus.queued).toBe(1);expect(d.paymentStatus.screening).toBe(1);expect(d.paymentStatus.returned).toBe(1);});
+ it("calculates available liquidity and buffer breaches",()=>{const d=s.dashboard();expect(d.liquidity[0].availableMinor).toBe(73000000);expect(d.liquidity[3].belowBuffer).toBe(true);expect(d.kpis.liquidityAccountsBelowBuffer).toBe(1);});
+ it("returns all payments and alerts",()=>{expect(s.payments).toHaveLength(5);expect(s.alerts).toHaveLength(5);});
+ it("acknowledges an alert and records ownership",()=>{const a=s.updateAlert("al-001","acknowledge","ops-analyst");expect(a.status).toBe("acknowledged");expect(a.owner).toBe("ops-analyst");expect(s.audit[0].action).toBe("alert.acknowledge");});
+ it("moves an alert into investigation",()=>{expect(s.updateAlert("al-001","investigate","fraud-reviewer").status).toBe("investigating");});
+ it("escalates an alert with an audit note",()=>{const a=s.updateAlert("al-001","escalate","senior-ops","Urgent review");expect(a.status).toBe("escalated");expect(s.audit[0].detail).toBe("Urgent review");});
+ it("resolves an alert and excludes it from open KPIs",()=>{s.updateAlert("al-001","resolve","reviewer");expect(s.dashboard().kpis.openAlerts).toBe(3);});
+ it("prevents changes to resolved alerts",()=>{s.updateAlert("al-001","resolve","reviewer");expect(()=>s.updateAlert("al-001","acknowledge","reviewer")).toThrow(/Resolved alert/);});
+ it("rejects unknown alert and missing actor",()=>{expect(()=>s.getAlert("missing")).toThrow(/not found/);expect(()=>s.updateAlert("al-001","acknowledge"," ")).toThrow(/Actor/);});
+ it("updates work item status and assigns an owner",()=>{const w=s.updateWorkItem("wi-001","in_progress","payments-ops");expect(w.status).toBe("in_progress");expect(w.owner).toBe("payments-ops");});
+ it("completes work items and updates outstanding count",()=>{s.updateWorkItem("wi-001","completed","ops");expect(s.dashboard().kpis.openWorkItems).toBe(3);});
+ it("rejects unknown work items and missing actor",()=>{expect(()=>s.updateWorkItem("missing","completed","ops")).toThrow(/not found/);expect(()=>s.updateWorkItem("wi-001","completed"," ")).toThrow(/Actor/);});
+ it("returns recent activity ordered by event time",()=>{const events=s.activity();expect(events.length).toBeGreaterThan(0);expect(Date.parse(events[0].at)).toBeGreaterThanOrEqual(Date.parse(events[events.length-1].at));});
+ it("tracks audit events for operational actions",()=>{s.updateAlert("al-001","investigate","analyst");s.updateWorkItem("wi-001","completed","operator");expect(s.audit).toHaveLength(2);});
+});
