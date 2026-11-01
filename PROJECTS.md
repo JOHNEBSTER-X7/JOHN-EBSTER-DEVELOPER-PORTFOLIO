@@ -147,4 +147,4 @@ A project only advances to a stronger status when evidence is available.
 **Path:** [projects/fintech/financial-crime-aml-platform](./projects/fintech/financial-crime-aml-platform/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate KYC/KYB onboarding, synthetic sanctions/PEP screening, transaction-monitoring rules, explainable risk scoring, alert investigation, case management, report drafting and audit events.  
-**Status:** Portfolio prototype published; CI verification pending. Watchlists and transactions are synthetic; no regulatory reporting or live screening integrations.
+**Status:** Prototype published; 19 automated tests, TypeScript check and build passed in GitHub Actions. Watchlists and transactions are synthetic; no regulatory reporting or live screening integrations.
