@@ -1,3 +1,4 @@
+import path from "node:path";
 import express from "express";
 import {timingSafeEqual} from "node:crypto";
 import {z} from "zod";
@@ -5,6 +6,7 @@ import {domains,EventStreamingService} from "./service";
 export const app=express();
 export const service=new EventStreamingService();
 app.use(express.json({limit:"256kb"}));
+app.use(express.static(path.join(process.cwd(),"public")));
 const equal=(a:string,b:string)=>{const x=Buffer.from(a),y=Buffer.from(b);return x.length===y.length&&timingSafeEqual(x,y);};
 function authenticate(req:express.Request,res:express.Response,next:express.NextFunction){const token=(req.header("authorization")??"").replace(/^Bearer /,"");if(!token){res.status(401).json({error:"Bearer token required"});return;}const entries=(process.env.STREAM_API_KEYS??"").split(",").map(x=>x.trim().split(":"));const found=entries.find(([role,key])=>!!role&&!!key&&equal(key,token));if(!found){res.status(401).json({error:"Invalid API credential"});return;}res.locals.role=found[0];next();}
 const wrap=(fn:(req:express.Request,res:express.Response)=>Promise<unknown>)=>(req:express.Request,res:express.Response)=>{fn(req,res).catch(e=>res.status(400).json({error:e instanceof Error?e.message:"Request failed"}));};
