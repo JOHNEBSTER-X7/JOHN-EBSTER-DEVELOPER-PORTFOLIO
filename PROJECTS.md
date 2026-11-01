@@ -169,3 +169,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate borrower/lender onboarding, credit applications, facility syndication, drawdowns, repayment schedules, collateral registers and covenant monitoring.  
 **Status:** Prototype published; 8 automated tests, TypeScript check and build passed in GitHub Actions. All records and operations are simulated; no real lending, bank or payment integrations.
+
+
+### Northstar Institutional Payments, Cross-Border Settlement & Treasury Infrastructure
+**Path:** [projects/fintech/cross-border-payments-settlement-platform](./projects/fintech/cross-border-payments-settlement-platform/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate multi-currency payment initiation, FX quote acceptance, idempotency, correspondent routing, synthetic screening, maker-checker approval, liquidity reservation, dispatch, simulated settlement/returns, ISO 20022-style and SWIFT-style message generation, treasury dashboards and statement reconciliation.  
+**Status:** Prototype published; automated test, type-check and build verification are pending. All accounts and transaction data are synthetic; no live bank, SWIFT, sanctions, FX or payment-scheme integrations.
