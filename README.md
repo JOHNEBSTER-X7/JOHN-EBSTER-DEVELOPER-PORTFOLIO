@@ -73,3 +73,5 @@ For professional enquiries, contact me through my GitHub profile: [github.com/JO
 | [Northstar Institutional Banking-as-a-Service & Open Banking](./projects/fintech/open-banking-baas-platform/) | TypeScript / Consent / Account aggregation / Payments / Fraud controls | Prototype; 16 tests, type-check and build passed in GitHub Actions |
 
 | [Northstar Institutional Fraud Detection, AML & Financial Crime Compliance](./projects/fintech/financial-crime-aml-platform/) | TypeScript / KYC / Screening / Transaction monitoring / Case management | Prototype; 19 tests, type-check and build passed in GitHub Actions |
+
+| [Northstar Institutional Digital Securities & Capital Markets](./projects/fintech/digital-securities-capital-markets/) | TypeScript / Securities issuance / Order matching / Settlement / Custody | Prototype; CI verification pending |
