@@ -44,7 +44,7 @@ This index distinguishes working software from planned work. Status labels are d
 **Path:** [projects/ai/multi-agent-business-automation](./projects/ai/multi-agent-business-automation/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest  
 **Goal:** Coordinate research, business analysis, writing and quality-review agents through a typed workflow with a human approval gate.  
-**Status:** Initial implementation published. CI verification pending. Agent execution is deterministic and uses the supplied brief only; workflow state is in-memory and no external action is executed.
+**Status:** Prototype published; TypeScript check, 10 tests and production build passed in GitHub Actions. Agent execution is deterministic and uses the supplied brief only; workflow state is in-memory and no external action is executed.
 
 ## Cloud and DevOps
 
