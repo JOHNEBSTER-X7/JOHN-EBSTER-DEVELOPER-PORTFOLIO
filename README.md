@@ -85,3 +85,5 @@ For professional enquiries, contact me through my GitHub profile: [github.com/JO
 | [Northstar Institutional Payments, Cross-Border Settlement & Treasury Infrastructure](./projects/fintech/cross-border-payments-settlement-platform/) | TypeScript / Express / FX / ISO 20022-style messaging / Settlement / Reconciliation | Prototype published; 18 automated tests, TypeScript check and build passed in GitHub Actions. All payment rails, screening, FX and settlement are simulated. |
 
 | [Northstar Banking Integration Gateway & Event Bus](./projects/fintech/banking-integration-gateway/) | TypeScript / Express / Event contracts / Authenticated API / Idempotent routing | Prototype published; 18 automated tests, TypeScript check and build passed in GitHub Actions. Consumer destinations remain simulated. |
+
+| [Northstar Institutional Event Streaming & Banking Data Platform](./projects/fintech/banking-event-streaming-platform/) | TypeScript / Append-only event log / Schema registry / Consumer offsets / Replay | Prototype published; CI verification pending. Single-node local storage; no distributed broker. |
