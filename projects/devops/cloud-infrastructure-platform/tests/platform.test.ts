@@ -8,6 +8,7 @@ const healthy:Service={id:"svc",name:"Service",description:"Demo",owner:"Platfor
 beforeEach(()=>reset());
 describe("Cloud deployment control plane",()=>{
  it("exposes health and dashboard",async()=>{expect((await request(app).get("/api/health")).body.status).toBe("ok");expect((await request(app).get("/api/dashboard")).body.metrics.services).toBe(3);});
+ it("exposes Prometheus-compatible operational metrics",async()=>{const r=await request(app).get("/api/metrics");expect(r.status).toBe(200);expect(r.text).toContain("northstar_services_total 3");expect(r.text).toContain("# TYPE northstar_services_healthy gauge");});
  it("lists service catalogue",async()=>{expect((await request(app).get("/api/services")).body.length).toBe(3);});
  it("accepts a valid semantic version",()=>{expect(readinessChecks(healthy,"staging","2.0.1")).toEqual([]);});
  it("rejects an invalid semantic version",()=>{expect(readinessChecks(healthy,"staging","latest").length).toBeGreaterThan(0);});
