@@ -26,6 +26,12 @@ This index distinguishes working software from planned work. Status labels are d
 **Goal:** Ingest PDF/TXT/Markdown files, chunk and index their text, retrieve relevant passages and return document/page/chunk citations.  
 **Status:** Retrieval-first prototype; 9 tests passed in GitHub Actions. Uses lexical token overlap, not embeddings or LLM-generated answers. No authentication or production data safeguards are implemented.
 
+### Northstar AI Customer Support Agent
+**Path:** [projects/ai/customer-support-agent](./projects/ai/customer-support-agent/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest  
+**Goal:** Provide browser chat, knowledge-base retrieval, conversation history, optional context-grounded LLM responses and a human-support escalation workflow.  
+**Status:** Initial implementation published. CI verification pending. Conversation storage and escalation are in-memory/demo-only; no external ticket is sent.
+
 ## Full-stack applications
 
 ### Northstar CRM — Enterprise Contact & Sales Workspace
