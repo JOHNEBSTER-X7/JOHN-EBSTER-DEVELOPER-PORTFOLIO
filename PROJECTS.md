@@ -105,4 +105,4 @@ A project only advances to a stronger status when evidence is available.
 **Path:** [projects/web3/digital-asset-tokenisation](./projects/web3/digital-asset-tokenisation/)  
 **Stack:** Solidity 0.8.24, OpenZeppelin, Hardhat, ethers, TypeScript, Express, Vitest  
 **Goal:** Demonstrate permissioned token issuance, investor allowlisting, asset metadata registration, fixed-allocation distribution claims and chain-event ingestion.  
-**Status:** Portfolio prototype published. Contracts and indexer are simulation components; no legal ownership, live securities offering, real KYC, custody or production RPC indexing is provided. CI verification is running.
+**Status:** Prototype published; 8 smart-contract tests, 4 indexer tests, TypeScript check, Solidity compilation and TypeScript build passed in GitHub Actions. No legal ownership, live securities offering, real KYC, custody or production RPC indexing is provided.
