@@ -85,3 +85,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** TypeScript, Express, Docker, Docker Compose, Kubernetes, Terraform, AWS ECS Fargate, ECR, ALB, CloudWatch, GitHub Actions OIDC  
 **Goal:** Demonstrate service catalogue, release readiness checks, approval-controlled deployments, operational events, containerisation and Kubernetes deployment configuration.  
 **Status:** Prototype published; TypeScript check, 13 tests, production build and AWS Terraform validation passed in GitHub Actions. AWS infrastructure and gated deployment workflow are prepared; no live AWS deployment has been activated.
+
+
+### Northstar FinTech Ledger & Reconciliation Platform
+**Path:** [projects/fintech/ledger-reconciliation-platform](./projects/fintech/ledger-reconciliation-platform/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate double-entry journal posting, account balances, idempotency, currency validation, and statement-reference reconciliation.  
+**Status:** Prototype published; 11 automated tests, TypeScript check and production build passed in GitHub Actions. In-memory only; does not process real payments or hold funds.
