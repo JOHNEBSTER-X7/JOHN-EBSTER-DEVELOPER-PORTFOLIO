@@ -182,4 +182,4 @@ A project only advances to a stronger status when evidence is available.
 **Path:** [projects/fintech/fraud-transaction-monitoring-intelligence](./projects/fintech/fraud-transaction-monitoring-intelligence/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate explainable 0–100 transaction risk scoring, velocity and behavioural rules, geographic/device indicators, shared-counterparty network analysis, alert creation, investigator assignment, notes, escalation, case disposition and monitoring dashboards.  
-**Status:** Prototype published; automated tests, TypeScript check and build verification pending. All data and signals are synthetic; no trained ML model, live watchlists or production fraud decisions.
+**Status:** Prototype published; 25 automated tests, TypeScript check and build passed in GitHub Actions. All data and signals are synthetic; no trained ML model, live watchlists or production fraud decisions.
