@@ -1,25 +1,64 @@
 # Market Intelligence API
 
-A Python/FastAPI learning project for serving illustrative market-signal records through a REST API.
+A small, testable FastAPI service that stores an illustrative sample of market-demand signals, ranks them with an explainable heuristic, filters by category and optionally summarises a signal with an OpenAI model.
 
-## Scope
+## What it demonstrates
 
-The intended API demonstrates health checks, signal listing and filtering, retrieval by identifier, and an optional LLM-generated summary.
+- Python 3.12 and FastAPI REST API design.
+- Pydantic models and response schemas.
+- Filtering, ranking, validation and HTTP error handling.
+- Explainable scoring rather than opaque ranking.
+- Optional LLM integration with a local fallback.
+- Pytest API tests and GitHub Actions CI.
+- Containerisation with Docker.
 
-## Data and model limitations
+## Run locally
 
-- Example signal data is synthetic and must not be represented as live market research.
-- Any score is a transparent heuristic demonstration, not a calibrated predictive model.
-- Optional language-model output may be incomplete or incorrect and should not be treated as financial advice.
-- No investment decision should be based on this prototype.
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
 
-## Planned structure
+Open `http://127.0.0.1:8000/docs` for the interactive API documentation.
 
-- `app/main.py` — FastAPI application
-- `tests/test_api.py` — API tests
-- `requirements.txt` — Python dependencies
-- `Dockerfile` — local container build
-- `.env.example` — configuration template
-- `.github/workflows/ci.yml` — continuous integration
+## Run tests
 
-The implementation and executable test results will be committed after the source bundle is checked. Until then, the test status is **not verified in this repository**.
+```bash
+pytest -q
+```
+
+**Local verification:** `7 passed` using Python 3.13 in the development environment on 1 November 2026. GitHub Actions is configured to run the suite on Python 3.12.
+
+## Optional LLM summaries
+
+Copy `.env.example` to `.env`, set `OPENAI_API_KEY`, then export the variables in your shell before starting the API. Never commit `.env` or expose API keys in screenshots or logs.
+
+Without an API key, the summary endpoint returns a local fallback. The LLM endpoint uses `OPENAI_MODEL` (default `gpt-4.1-mini`).
+
+## Docker
+
+```bash
+docker build -t market-intelligence-api .
+docker run --rm -p 8000:8000 market-intelligence-api
+```
+
+## Endpoints
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| GET | `/health` | Health check |
+| GET | `/signals` | Ranked signals; supports `category` and `min_score` |
+| GET | `/signals/{signal_id}` | One signal |
+| POST | `/signals/{signal_id}/summary` | Optional LLM summary |
+
+Example:
+
+```bash
+curl 'http://127.0.0.1:8000/signals?category=ai'
+```
+
+## Data and limitations
+
+The included records are synthetic examples for demonstration, not scraped or verified market observations. The score is a transparent heuristic based on mention count, urgency and competition. It is not a statistically validated forecast, investment recommendation or proof of customer demand. A production version would require source connectors, deduplication, timestamps, provenance, user authentication, persistence, rate limiting, observability and human review.
