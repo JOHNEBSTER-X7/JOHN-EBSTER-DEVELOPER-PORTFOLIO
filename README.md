@@ -76,4 +76,4 @@ For professional enquiries, contact me through my GitHub profile: [github.com/JO
 
 | [Northstar Institutional Digital Securities & Capital Markets](./projects/fintech/digital-securities-capital-markets/) | TypeScript / Securities issuance / Order matching / Settlement / Custody | Prototype; 18 tests, type-check and build passed in GitHub Actions |
 
-| [Northstar Institutional Private Equity, Venture Capital & Fund Administration](./projects/fintech/private-equity-fund-administration/) | TypeScript / GP-LP / Capital calls / NAV / Fund waterfalls | Prototype; CI verification pending |
+| [Northstar Institutional Private Equity, Venture Capital & Fund Administration](./projects/fintech/private-equity-fund-administration/) | TypeScript / GP-LP / Capital calls / NAV / Fund waterfalls | Prototype; 19 tests, type-check and build passed in GitHub Actions |
