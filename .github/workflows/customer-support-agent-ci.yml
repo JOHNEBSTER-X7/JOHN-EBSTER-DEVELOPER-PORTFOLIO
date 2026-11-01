@@ -1,0 +1,39 @@
+name: Customer Support Agent CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "projects/ai/customer-support-agent/**"
+      - ".github/workflows/customer-support-agent-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "projects/ai/customer-support-agent/**"
+      - ".github/workflows/customer-support-agent-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/ai/customer-support-agent
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: projects/ai/customer-support-agent/package.json
+      - name: Install dependencies
+        run: npm install
+      - name: Type-check
+        run: npm run typecheck
+      - name: Run tests
+        run: npm test
+      - name: Build
+        run: npm run build
