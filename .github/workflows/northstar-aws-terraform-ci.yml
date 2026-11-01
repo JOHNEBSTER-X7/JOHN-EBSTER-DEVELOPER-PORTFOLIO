@@ -1,0 +1,32 @@
+name: Northstar AWS Terraform Validation
+on:
+  push:
+    branches: [main]
+    paths:
+      - "projects/devops/cloud-infrastructure-platform/infra/aws/**"
+      - ".github/workflows/northstar-aws-terraform-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "projects/devops/cloud-infrastructure-platform/infra/aws/**"
+      - ".github/workflows/northstar-aws-terraform-ci.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/devops/cloud-infrastructure-platform/infra/aws
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.10.5"
+      - name: Format check
+        run: terraform fmt -check -recursive
+      - name: Initialise without remote backend
+        run: terraform init -backend=false
+      - name: Validate configuration
+        run: terraform validate
