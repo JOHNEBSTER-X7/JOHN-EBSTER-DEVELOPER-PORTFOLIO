@@ -106,3 +106,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** Solidity 0.8.24, OpenZeppelin, Hardhat, ethers, TypeScript, Express, Vitest  
 **Goal:** Demonstrate permissioned token issuance, investor allowlisting, asset metadata registration, fixed-allocation distribution claims and chain-event ingestion.  
 **Status:** Prototype published; 8 smart-contract tests, 4 indexer tests, TypeScript check, Solidity compilation and TypeScript build passed in GitHub Actions. No legal ownership, live securities offering, real KYC, custody or production RPC indexing is provided.
+
+
+### Northstar Institutional DeFi & Liquidity Protocol
+**Path:** [projects/web3/institutional-defi-liquidity](./projects/web3/institutional-defi-liquidity/)  
+**Stack:** Solidity 0.8.24, OpenZeppelin, Hardhat, ethers, TypeScript, Express, Vitest  
+**Goal:** Demonstrate a constant-product AMM, LP shares, fee-bearing swaps, collateralised borrowing, oracle-based health checks, liquidation and chain-event ingestion.  
+**Status:** Educational prototype published; automated verification is running. Not audited and not suitable for real funds.
