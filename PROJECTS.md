@@ -46,6 +46,12 @@ This index distinguishes working software from planned work. Status labels are d
 **Goal:** Coordinate research, business analysis, writing and quality-review agents through a typed workflow with a human approval gate.  
 **Status:** Prototype published; TypeScript check, 10 tests and production build passed in GitHub Actions. Agent execution is deterministic and uses the supplied brief only; workflow state is in-memory and no external action is executed.
 
+### Northstar Enterprise Research & Intelligence
+**Path:** [projects/ai/enterprise-research-intelligence](./projects/ai/enterprise-research-intelligence/)  
+**Stack:** TypeScript, Node.js, Express, Tavily API adapter, PDF extraction, lexical retrieval, Vitest  
+**Goal:** Combine optional live web search with uploaded documents, evidence retrieval, source registers, research reports and Markdown export.  
+**Status:** Initial implementation published. CI verification pending. Live search requires a Tavily API key; without it, only uploaded documents are searched. Relevance scores are not credibility ratings.
+
 ## Cloud and DevOps
 
 Planned project area. Candidate work includes containerised services, CI pipelines and serverless processing.
