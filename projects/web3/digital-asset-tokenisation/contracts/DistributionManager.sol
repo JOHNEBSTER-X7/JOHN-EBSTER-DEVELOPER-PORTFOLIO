@@ -17,6 +17,7 @@ contract DistributionManager is AccessControl, ReentrancyGuard {
         bool active;
     }
     uint256 public nextDistributionId = 1;
+    mapping(uint256 => uint256) public totalAllocated;
     mapping(uint256 => Distribution) public distributions;
     mapping(uint256 => mapping(address => uint256)) public allocations;
     mapping(uint256 => mapping(address => bool)) public claimed;
@@ -43,10 +44,10 @@ contract DistributionManager is AccessControl, ReentrancyGuard {
         require(d.active && investor != address(0) && amount > 0, "Invalid allocation");
         require(!claimed[id][investor], "Already claimed");
         uint256 old = allocations[id][investor];
-        require(d.totalClaimed + amount <= d.totalFunded, "Allocation exceeds funding");
+        require(totalAllocated[id] - old + amount <= d.totalFunded, "Allocation exceeds funding");
+        totalAllocated[id] = totalAllocated[id] - old + amount;
         allocations[id][investor] = amount;
         emit AllocationSet(id, investor, amount);
-        old;
     }
 
     function claim(uint256 id) external nonReentrant {
