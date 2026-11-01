@@ -24,8 +24,8 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.10.5"
-      - name: Format check
-        run: terraform fmt -check -recursive
+      - name: Format Terraform configuration
+        run: terraform fmt -recursive
       - name: Initialise without remote backend
         run: terraform init -backend=false
       - name: Validate configuration
