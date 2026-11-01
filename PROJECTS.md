@@ -140,4 +140,4 @@ A project only advances to a stronger status when evidence is available.
 **Path:** [projects/fintech/open-banking-baas-platform](./projects/fintech/open-banking-baas-platform/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate consent-bound account aggregation, transaction access, payment initiation, idempotency, balance reservation, transaction categorisation, fraud-alert review, reconciliation and audit events.  
-**Status:** Portfolio prototype published; CI verification pending. All accounts and payments are synthetic; no live bank or payment integrations.
+**Status:** Prototype published; 16 automated tests, TypeScript check and build passed in GitHub Actions. All accounts and payments are synthetic; no live bank or payment integrations.
