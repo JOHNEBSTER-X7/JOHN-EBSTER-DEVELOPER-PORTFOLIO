@@ -1,0 +1,23 @@
+import express from "express";
+import {z} from "zod";
+import {FraudIntelligenceService} from "./service";
+
+export const app=express();
+export const service=new FraudIntelligenceService();
+app.use(express.json({limit:"256kb"}));
+const wrap=(fn:(req:express.Request,res:express.Response)=>unknown)=>(req:express.Request,res:express.Response)=>{try{fn(req,res);}catch(e){res.status(400).json({error:e instanceof Error?e.message:"Request failed"});}};
+const schema=z.object({reference:z.string().min(1),customerId:z.string().min(1),accountId:z.string().min(1),amountMinor:z.number().int().positive(),currency:z.enum(["GBP","USD","EUR"]),direction:z.enum(["debit","credit"]),counterpartyId:z.string().min(1),counterpartyName:z.string().min(1),country:z.string().length(2),channel:z.enum(["mobile","web","branch","api","card"]),deviceId:z.string().optional(),ipCountry:z.string().optional(),occurredAt:z.string().datetime(),memo:z.string().optional()});
+app.get("/health",(_req,res)=>res.json({status:"ok",service:"northstar-fraud-intelligence",mode:"synthetic-data"}));
+app.get("/dashboard",(_req,res)=>res.json(service.dashboard()));
+app.get("/transactions",(_req,res)=>res.json(service.transactions));
+app.get("/transactions/:id",wrap((req,res)=>res.json(service.getTransaction(String(req.params.id)))));
+app.post("/transactions",wrap((req,res)=>{const input=schema.parse(req.body);const existed=service.transactions.some(t=>t.reference===input.reference);const tx=service.ingest(input);res.status(existed?200:201).json(tx);}));
+app.get("/alerts",(_req,res)=>res.json(service.transactions.filter(t=>t.riskScore>=35)));
+app.get("/cases",(_req,res)=>res.json(service.cases));
+app.get("/cases/:id",wrap((req,res)=>res.json(service.getCase(String(req.params.id)))));
+app.post("/cases/:id/assign",wrap((req,res)=>{const b=z.object({analyst:z.string().min(2)}).parse(req.body);res.json(service.assignCase(String(req.params.id),b.analyst));}));
+app.post("/cases/:id/notes",wrap((req,res)=>{const b=z.object({actor:z.string().min(2),note:z.string().min(3)}).parse(req.body);res.json(service.addNote(String(req.params.id),b.actor,b.note));}));
+app.post("/cases/:id/escalate",wrap((req,res)=>{const b=z.object({actor:z.string().min(2),reason:z.string().min(3)}).parse(req.body);res.json(service.escalateCase(String(req.params.id),b.actor,b.reason));}));
+app.post("/cases/:id/close",wrap((req,res)=>{const b=z.object({actor:z.string().min(2),disposition:z.enum(["fraud_confirmed","suspicious_unconfirmed","false_positive","no_action"]),rationale:z.string().min(3)}).parse(req.body);res.json(service.closeCase(String(req.params.id),b.actor,b.disposition,b.rationale));}));
+app.get("/network/shared-counterparties",(_req,res)=>res.json(service.network()));
+app.get("/audit",(_req,res)=>res.json(service.audit));
