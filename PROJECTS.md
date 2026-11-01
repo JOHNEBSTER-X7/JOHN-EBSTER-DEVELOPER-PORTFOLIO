@@ -141,3 +141,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate consent-bound account aggregation, transaction access, payment initiation, idempotency, balance reservation, transaction categorisation, fraud-alert review, reconciliation and audit events.  
 **Status:** Prototype published; 16 automated tests, TypeScript check and build passed in GitHub Actions. All accounts and payments are synthetic; no live bank or payment integrations.
+
+
+### Northstar Institutional Fraud Detection, AML & Financial Crime Compliance Platform
+**Path:** [projects/fintech/financial-crime-aml-platform](./projects/fintech/financial-crime-aml-platform/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate KYC/KYB onboarding, synthetic sanctions/PEP screening, transaction-monitoring rules, explainable risk scoring, alert investigation, case management, report drafting and audit events.  
+**Status:** Portfolio prototype published; CI verification pending. Watchlists and transactions are synthetic; no regulatory reporting or live screening integrations.
