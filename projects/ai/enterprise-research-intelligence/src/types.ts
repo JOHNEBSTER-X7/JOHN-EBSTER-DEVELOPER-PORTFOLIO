@@ -1,0 +1,2 @@
+export type Source = { id:string; title:string; url:string; content:string; publishedDate?:string; sourceType:"web"|"document"; relevanceScore:number };
+export type ResearchReport = { id:string; query:string; createdAt:string; status:"completed"|"insufficient_evidence"; researchMode:"tavily-live"|"uploaded-documents-only"|"no-source-connector"; sources:Source[]; themes:string[]; findings:string[]; gaps:string[]; reportMarkdown:string };
