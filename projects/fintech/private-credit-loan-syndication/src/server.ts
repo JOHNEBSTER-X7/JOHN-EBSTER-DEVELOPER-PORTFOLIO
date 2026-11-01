@@ -1,0 +1,1 @@
+import {createApp} from "./app";const port=Number(process.env.PORT??3493);createApp().listen(port,()=>console.log(`Northstar Private Credit API listening on ${port}`));
