@@ -119,4 +119,4 @@ A project only advances to a stronger status when evidence is available.
 **Path:** [projects/fintech/digital-asset-exchange](./projects/fintech/digital-asset-exchange/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate a price-time-priority limit order book, market and limit orders, partial fills, cancellation, simulated balances, market depth and trade history.  
-**Status:** Portfolio prototype published; CI verification pending. Balances and matching are in-memory simulations, not a live exchange or custody service.
+**Status:** Prototype published; 10 automated tests, TypeScript check and build passed in GitHub Actions. Balances and matching are in-memory simulations, not a live exchange or custody service.
