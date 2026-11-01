@@ -8,7 +8,7 @@ A cloud operations and deployment control-plane portfolio project. It demonstrat
 - Semantic-version and service-health readiness policies.
 - Deployment request and approval state machine.
 - Human approval required before simulated execution.
-- Deployment history, operational events and dashboard metrics.
+- Deployment history, operational events and dashboard metrics.\n- Prometheus-compatible metrics endpoint (`/api/metrics`) and example scrape configuration.
 - Multi-stage Dockerfile, Compose configuration and Kubernetes Deployment/Service manifests.
 - Express API, TypeScript, Zod and Vitest.
 
