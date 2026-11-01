@@ -183,3 +183,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate explainable 0–100 transaction risk scoring, velocity and behavioural rules, geographic/device indicators, shared-counterparty network analysis, alert creation, investigator assignment, notes, escalation, case disposition and monitoring dashboards.  
 **Status:** Prototype published; 25 automated tests, TypeScript check and build passed in GitHub Actions. All data and signals are synthetic; no trained ML model, live watchlists or production fraud decisions.
+
+
+### Northstar Institutional Banking Operations Command Centre
+**Path:** [projects/fintech/banking-operations-command-centre](./projects/fintech/banking-operations-command-centre/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest, responsive HTML/CSS/JavaScript dashboard  
+**Goal:** Consolidate synthetic payments, treasury liquidity, fraud/AML alerts, reconciliation exceptions and operational work queues into one management view, with alert actions, task ownership, audit events and a documented integration roadmap.  
+**Status:** Prototype published; automated tests, TypeScript check and build verification pending. It is a standalone fixture-backed dashboard; independent portfolio systems are not connected.
