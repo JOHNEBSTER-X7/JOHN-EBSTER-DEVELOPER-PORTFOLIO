@@ -1,0 +1,27 @@
+name: Solidity CI
+
+on:
+  push:
+    paths:
+      - "projects/web3/three-of-five-multisig/**"
+  pull_request:
+    paths:
+      - "projects/web3/three-of-five-multisig/**"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/web3/three-of-five-multisig
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: projects/web3/three-of-five-multisig/package-lock.json
+      - run: npm install
+      - run: npm run compile
+      - run: npm test
