@@ -1,0 +1,39 @@
+name: Multi-Agent Business Automation CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "projects/ai/multi-agent-business-automation/**"
+      - ".github/workflows/multi-agent-business-automation-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "projects/ai/multi-agent-business-automation/**"
+      - ".github/workflows/multi-agent-business-automation-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/ai/multi-agent-business-automation
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: projects/ai/multi-agent-business-automation/package.json
+      - name: Install dependencies
+        run: npm install
+      - name: Type-check
+        run: npm run typecheck
+      - name: Run tests
+        run: npm test
+      - name: Build
+        run: npm run build
