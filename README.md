@@ -70,4 +70,4 @@ For professional enquiries, contact me through my GitHub profile: [github.com/JO
 
 | [Northstar Institutional Trade Finance & Supply Chain Finance](./projects/fintech/trade-finance-supply-chain-platform/) | TypeScript / Trade finance / Document controls / Credit workflows | Prototype; 13 tests, type-check and build passed in GitHub Actions |
 
-| [Northstar Institutional Banking-as-a-Service & Open Banking](./projects/fintech/open-banking-baas-platform/) | TypeScript / Consent / Account aggregation / Payments / Fraud controls | Prototype; CI verification pending |
+| [Northstar Institutional Banking-as-a-Service & Open Banking](./projects/fintech/open-banking-baas-platform/) | TypeScript / Consent / Account aggregation / Payments / Fraud controls | Prototype; 16 tests, type-check and build passed in GitHub Actions |
