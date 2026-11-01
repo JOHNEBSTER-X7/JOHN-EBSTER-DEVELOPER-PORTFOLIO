@@ -189,4 +189,4 @@ A project only advances to a stronger status when evidence is available.
 **Path:** [projects/fintech/banking-operations-command-centre](./projects/fintech/banking-operations-command-centre/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest, responsive HTML/CSS/JavaScript dashboard  
 **Goal:** Consolidate synthetic payments, treasury liquidity, fraud/AML alerts, reconciliation exceptions and operational work queues into one management view, with alert actions, task ownership, audit events and a documented integration roadmap.  
-**Status:** Prototype published; automated tests, TypeScript check and build verification pending. It is a standalone fixture-backed dashboard; independent portfolio systems are not connected.
+**Status:** Prototype published; 23 automated tests, TypeScript check and build passed in GitHub Actions. It is a standalone fixture-backed dashboard; independent portfolio systems are not connected.
