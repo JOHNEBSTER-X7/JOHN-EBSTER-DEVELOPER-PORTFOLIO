@@ -1,0 +1,39 @@
+name: Business Operations Platform CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "projects/full-stack/business-operations-platform/**"
+      - ".github/workflows/business-operations-platform-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "projects/full-stack/business-operations-platform/**"
+      - ".github/workflows/business-operations-platform-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/full-stack/business-operations-platform
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: projects/full-stack/business-operations-platform/package.json
+      - run: npm install
+        name: Install dependencies
+      - run: npm run typecheck
+        name: Type-check
+      - run: npm test
+        name: Run tests
+      - run: npm run build
+        name: Build
