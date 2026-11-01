@@ -113,3 +113,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** Solidity 0.8.24, OpenZeppelin, Hardhat, ethers, TypeScript, Express, Vitest  
 **Goal:** Demonstrate a constant-product AMM, LP shares, fee-bearing swaps, collateralised borrowing, oracle-based health checks, liquidation and chain-event ingestion.  
 **Status:** Prototype published; 10 smart-contract tests, 4 indexer tests, Solidity compilation, TypeScript check and build passed in GitHub Actions. Not audited and not suitable for real funds.
+
+
+### Northstar Institutional Digital Asset Exchange
+**Path:** [projects/fintech/digital-asset-exchange](./projects/fintech/digital-asset-exchange/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate a price-time-priority limit order book, market and limit orders, partial fills, cancellation, simulated balances, market depth and trade history.  
+**Status:** Portfolio prototype published; CI verification pending. Balances and matching are in-memory simulations, not a live exchange or custody service.
