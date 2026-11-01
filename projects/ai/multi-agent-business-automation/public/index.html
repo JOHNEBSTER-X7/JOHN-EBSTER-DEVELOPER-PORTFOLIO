@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Human-supervised multi-agent business workflow demo">
+  <title>Northstar | Agent Orchestrator</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header><div class="mark">N</div><div><strong>Northstar Orchestrator</strong><small>Multi-agent business workspace</small></div><span class="status"><i></i> System ready</span></header>
+    <section class="hero"><p class="eyebrow">AI WORKFLOW STUDIO</p><h1>From business brief<br>to reviewed deliverable.</h1><p>Four specialist agents collaborate on a workflow. You stay in control of the final decision.</p></section>
+    <section class="panel">
+      <div class="panel-head"><div><strong>Start a workflow</strong><small>Describe the business outcome you want to achieve.</small></div><span class="tag">HUMAN-SUPERVISED</span></div>
+      <form id="workflow-form">
+        <label class="sr-only" for="goal">Business objective</label>
+        <textarea id="goal" minlength="10" maxlength="3000" required placeholder="Example: Create a customer retention plan for an online retailer experiencing increased returns..."></textarea>
+        <div class="form-foot"><span>Research → Analysis → Writing → Review</span><button id="run" type="submit">Run agents <b>→</b></button></div>
+      </form>
+    </section>
+    <section id="result" class="result hidden">
+      <div class="result-head"><div><p class="eyebrow">WORKFLOW EXECUTION</p><h2 id="workflow-title">Agent activity</h2></div><span id="workflow-status" class="tag">IN PROGRESS</span></div>
+      <div id="agents" class="agents"></div>
+      <article class="deliverable"><div class="deliverable-head"><strong>Generated deliverable</strong><button id="copy" class="copy">Copy brief</button></div><pre id="deliverable"></pre></article>
+      <article id="approval" class="approval">
+        <p class="eyebrow">HUMAN APPROVAL REQUIRED</p><h3>Review before external release</h3><p id="approval-note"></p><div class="approval-actions"><button id="reject" class="reject">Reject</button><button id="approve" class="approve">Approve workflow</button></div><small>Approval updates the demo workflow state only. No email or external system is contacted.</small>
+      </article>
+    </section>
+    <section class="panel history"><div class="panel-head"><div><strong>Recent workflows</strong><small>Current server session</small></div><button id="refresh" class="quiet">Refresh</button></div><div id="workflow-list" class="workflow-list"><p class="empty">Your workflows will appear here.</p></div></section>
+    <footer>Northstar Multi-Agent Business Automation · Portfolio prototype</footer>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
