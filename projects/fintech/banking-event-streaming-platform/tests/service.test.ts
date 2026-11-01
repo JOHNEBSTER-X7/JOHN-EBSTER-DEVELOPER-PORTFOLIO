@@ -1,0 +1,25 @@
+import {afterEach,describe,it,expect} from "vitest";
+import {mkdtemp,rm} from "node:fs/promises";
+import {tmpdir} from "node:os";
+import path from "node:path";
+import {EventStreamingService} from "../src/service";
+let dirs:string[]=[];
+async function make(){const d=await mkdtemp(path.join(tmpdir(),"northstar-stream-"));dirs.push(d);return new EventStreamingService(d);}
+const input=(id="event-stream-0001")=>({eventId:id,eventType:"payments.payment.created",schemaVersion:"1.0",source:"payments" as const,occurredAt:"2026-11-01T10:00:00.000Z",correlationId:"corr-001",subjectId:"payment-001",payload:{currency:"GBP",amountMinor:1000}});
+afterEach(async()=>{await Promise.all(dirs.map(d=>rm(d,{recursive:true,force:true})));dirs=[];});
+describe("Persistent event streaming service",()=>{
+ it("appends accepted events and assigns monotonic offsets",async()=>{const s=await make();const a=await s.publish(input(),"payments");const b=await s.publish(input("event-stream-0002"),"payments");expect(a.event.offset).toBe(1);expect(b.event.offset).toBe(2);});
+ it("deduplicates event IDs",async()=>{const s=await make();await s.publish(input(),"payments");const d=await s.publish(input(),"payments");expect(d.duplicate).toBe(true);expect((await s.snapshot()).stream.events).toBe(1);});
+ it("persists events across service restarts",async()=>{const d=await mkdtemp(path.join(tmpdir(),"northstar-restart-"));dirs.push(d);const s=new EventStreamingService(d);await s.publish(input(),"payments");const reopened=new EventStreamingService(d);expect((await reopened.eventsAfter(0)).map(e=>e.eventId)).toEqual(["event-stream-0001"]);});
+ it("rejects unregistered event schemas",async()=>{const s=await make();await expect(s.publish({...input(),eventType:"payments.unknown.event"},"payments")).rejects.toThrow(/not registered/);});
+ it("enforces required schema payload fields",async()=>{const s=await make();await expect(s.publish({...input(),payload:{currency:"GBP"}},"payments")).rejects.toThrow(/Missing required/);});
+ it("registers new schema versions",async()=>{const s=await make();const schema=await s.registerSchema("payments.payment.created","payments","2.0",["currency","amountMinor","merchant"],"admin");expect(schema.version).toBe("2.0");});
+ it("rejects schema key domain mismatch and duplicate version",async()=>{const s=await make();await expect(s.registerSchema("aml.case.created","payments","1.0",[],"admin")).rejects.toThrow(/namespaced/);await expect(s.registerSchema("payments.payment.created","payments","1.0",[],"admin")).rejects.toThrow(/already exists/);});
+ it("registers a consumer at earliest and polls unacknowledged events",async()=>{const s=await make();await s.publish(input(),"payments");await s.registerConsumer("operations-dashboard");const events=await s.poll("operations-dashboard");expect(events).toHaveLength(1);expect(events[0].offset).toBe(1);});
+ it("registers a consumer at latest without replaying history",async()=>{const s=await make();await s.publish(input(),"payments");await s.registerConsumer("new-consumer","latest");expect(await s.poll("new-consumer")).toHaveLength(0);});
+ it("requires sequential acknowledgements and persists offsets",async()=>{const s=await make();await s.publish(input(),"payments");await s.publish(input("event-stream-0002"),"payments");await s.registerConsumer("operations-dashboard");await expect(s.acknowledge("operations-dashboard",2,"ops")).rejects.toThrow(/sequential/);await s.acknowledge("operations-dashboard",1,"ops");const reopened=new EventStreamingService(s.directory);expect((await reopened.snapshot()).consumers[0].offset).toBe(1);});
+ it("records failures and dead-letters after three attempts",async()=>{const s=await make();await s.publish(input(),"payments");await s.registerConsumer("ops-consumer");await s.fail("ops-consumer",1,"downstream unavailable","ops");await s.fail("ops-consumer",1,"still unavailable","ops");const f=await s.fail("ops-consumer",1,"retry limit","ops");expect(f.status).toBe("dead_letter");expect((await s.snapshot()).deadLetterCount).toBe(1);});
+ it("allows replay of retryable failures and removes failure record",async()=>{const s=await make();await s.publish(input(),"payments");await s.registerConsumer("ops-consumer");await s.fail("ops-consumer",1,"temporary issue","ops");const e=await s.replay("ops-consumer",1,"ops");expect(e.eventId).toBe("event-stream-0001");expect((await s.snapshot()).failures).toHaveLength(0);});
+ it("pauses consumers and blocks polling until reactivated",async()=>{const s=await make();await s.registerConsumer("ops-consumer");await s.setConsumerStatus("ops-consumer","paused","ops");await expect(s.poll("ops-consumer")).rejects.toThrow(/paused/);await s.setConsumerStatus("ops-consumer","active","ops");expect(await s.poll("ops-consumer")).toHaveLength(0);});
+ it("rejects invalid consumers, limits and unknown offsets",async()=>{const s=await make();await expect(s.registerConsumer("x")).rejects.toThrow(/Invalid consumer/);await s.registerConsumer("ops-consumer");await expect(s.poll("ops-consumer",101)).rejects.toThrow(/Limit/);await expect(s.acknowledge("ops-consumer",1,"ops")).rejects.toThrow(/not found/);});
+});
