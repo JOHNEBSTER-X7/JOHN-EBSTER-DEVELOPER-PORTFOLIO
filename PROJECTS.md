@@ -8,7 +8,7 @@ This index distinguishes working software from planned work. Status labels are d
 **Path:** `projects/web3/three-of-five-multisig/`  
 **Stack:** Solidity, Hardhat, JavaScript  
 **Goal:** Demonstrate owner management, proposal submission, confirmation/revocation and threshold-based execution for a fixed five-owner wallet.  
-**Status:** Educational prototype. It has not been security-audited and must not hold production funds.
+**Status:** Educational prototype. Solidity compilation and Hardhat test execution remain pending; GitHub Actions is configured to run both. It has not been security-audited and must not hold production funds.
 
 ## Python and backend engineering
 
@@ -16,7 +16,7 @@ This index distinguishes working software from planned work. Status labels are d
 **Path:** `projects/python/market-intelligence-api/`  
 **Stack:** Python, FastAPI, Pydantic, pytest  
 **Goal:** Provide a small REST API for browsing and scoring illustrative market signals.  
-**Status:** Prototype. Included sample signals are synthetic; heuristic scores are not validated investment or forecasting outputs. Optional LLM summaries require a separately configured API key.
+**Status:** Prototype; 7 pytest tests passed locally on Python 3.13. GitHub Actions is configured to run the suite on Python 3.12. Included sample signals are synthetic; heuristic scores are not validated investment or forecasting outputs.
 
 ## Full-stack applications
 
