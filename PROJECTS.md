@@ -203,4 +203,4 @@ Status: Prototype published; 18 automated tests, TypeScript check and build pass
 Path: `projects/fintech/banking-event-streaming-platform/`  
 Stack: TypeScript, Node.js, Express, Zod, append-only JSONL persistence, Vitest and Supertest.  
 Scope: Versioned event schemas, persistent event offsets, consumer groups, sequential acknowledgements, replay, failure tracking and dead-letter monitoring.  
-Status: Prototype published; CI verification pending. Local single-node persistence; not a distributed message broker.
+Status: Prototype published; 23 automated tests, TypeScript check and build passed in GitHub Actions. Local single-node persistence; not a distributed message broker.
