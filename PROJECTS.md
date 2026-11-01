@@ -99,3 +99,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate customer and merchant onboarding, simulated KYC review, payment lifecycle, idempotency, risk scoring, refunds, chargeback disputes and compliance alert handling.  
 **Status:** Prototype published; 12 automated tests, TypeScript check and production build passed in GitHub Actions. All money movement and identity review are simulated; no real payment processing or KYC verification is connected.
+
+
+### Northstar Enterprise Digital Asset Tokenisation Platform
+**Path:** [projects/web3/digital-asset-tokenisation](./projects/web3/digital-asset-tokenisation/)  
+**Stack:** Solidity 0.8.24, OpenZeppelin, Hardhat, ethers, TypeScript, Express, Vitest  
+**Goal:** Demonstrate permissioned token issuance, investor allowlisting, asset metadata registration, fixed-allocation distribution claims and chain-event ingestion.  
+**Status:** Portfolio prototype published. Contracts and indexer are simulation components; no legal ownership, live securities offering, real KYC, custody or production RPC indexing is provided. CI verification is running.
