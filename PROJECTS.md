@@ -120,3 +120,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate a price-time-priority limit order book, market and limit orders, partial fills, cancellation, simulated balances, market depth and trade history.  
 **Status:** Prototype published; 10 automated tests, TypeScript check and build passed in GitHub Actions. Balances and matching are in-memory simulations, not a live exchange or custody service.
+
+
+### Northstar Institutional Treasury & Risk Management Platform
+**Path:** [projects/fintech/treasury-risk-platform](./projects/fintech/treasury-risk-platform/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate multi-currency treasury positions, dated liquidity forecasts, GBP FX exposure, scenario stress tests, counterparty limits and maker-checker transaction approvals.  
+**Status:** Portfolio prototype published; CI verification pending. Uses synthetic balances and illustrative static FX rates; not connected to banks or live markets.
