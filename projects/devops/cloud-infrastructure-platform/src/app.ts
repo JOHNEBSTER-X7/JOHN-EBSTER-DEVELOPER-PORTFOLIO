@@ -28,7 +28,7 @@ app.get("/api/metrics",(_req,res)=>{const m=dashboard();res.type("text/plain; ve
  "# HELP northstar_operational_events_total Number of retained operational events",
  "# TYPE northstar_operational_events_total gauge",
  "northstar_operational_events_total "+m.events
- ].join("\\n")+"\\n");});
+ ].join(String.fromCharCode(10))+String.fromCharCode(10));});
 app.get("/api/dashboard",(_req,res)=>res.json({metrics:dashboard(),services:getServices(),recentEvents:getEvents()}));
 app.get("/api/services",(_req,res)=>res.json(getServices()));
 app.get("/api/deployments",(_req,res)=>res.json(getDeployments()));
