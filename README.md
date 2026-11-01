@@ -20,7 +20,7 @@ A practical engineering portfolio documenting projects in full-stack development
 | Project | Area | Status |
 |---|---|---|
 | [Three-of-Five Multisignature Wallet](./projects/web3/three-of-five-multisig/) | Solidity / Web3 security | Prototype; test status documented in project |
-| [Market Intelligence API](./projects/python/market-intelligence-api/) | Python / FastAPI | Prototype; 7 CI tests passed; synthetic sample data |\n| [Northstar CRM](./projects/full-stack/enterprise-crm/) | Next.js / TypeScript / PostgreSQL | Initial implementation; CI verification pending |
+| [Market Intelligence API](./projects/python/market-intelligence-api/) | Python / FastAPI | Prototype; 7 CI tests passed; synthetic sample data |\n| [Northstar CRM](./projects/full-stack/enterprise-crm/) | Next.js / TypeScript / PostgreSQL | Initial implementation; CI passed; runtime/database deployment not verified |
 | [DRAGO X Protocol](https://github.com/JOHNEBSTER-X7/DRAGO_X_PROTOCOL_FC) | Solidity / digital-asset infrastructure | Separate project repository |
 
 Project folders include their own README files, setup instructions, architecture notes and limitations. See [PROJECTS.md](./PROJECTS.md) for the portfolio index.
