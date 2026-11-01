@@ -134,3 +134,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate importer/exporter onboarding, trade-document verification, letters of credit, invoice and purchase-order finance workflows, explainable risk scoring, lender facility checks, maker-checker approvals, simulated funding and settlement, and audit events.  
 **Status:** Prototype published; 13 automated tests, TypeScript check and build passed in GitHub Actions. Funding and settlement are simulated; no live lender or bank integrations.
+
+
+### Northstar Institutional Banking-as-a-Service & Open Banking Platform
+**Path:** [projects/fintech/open-banking-baas-platform](./projects/fintech/open-banking-baas-platform/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate consent-bound account aggregation, transaction access, payment initiation, idempotency, balance reservation, transaction categorisation, fraud-alert review, reconciliation and audit events.  
+**Status:** Portfolio prototype published; CI verification pending. All accounts and payments are synthetic; no live bank or payment integrations.
