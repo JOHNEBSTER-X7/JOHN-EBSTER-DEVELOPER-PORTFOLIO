@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: northstar-cloud-platform
+  labels:
+    app: northstar-cloud-platform
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: northstar-cloud-platform
+  template:
+    metadata:
+      labels:
+        app: northstar-cloud-platform
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/your-org/northstar-cloud-platform:latest
+          ports:
+            - containerPort: 3400
+          env:
+            - name: PORT
+              value: "3400"
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3400
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 3400
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: northstar-cloud-platform
+spec:
+  selector:
+    app: northstar-cloud-platform
+  ports:
+    - port: 80
+      targetPort: 3400
+  type: ClusterIP
