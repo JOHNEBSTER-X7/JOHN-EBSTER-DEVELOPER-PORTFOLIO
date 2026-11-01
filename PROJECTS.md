@@ -133,4 +133,4 @@ A project only advances to a stronger status when evidence is available.
 **Path:** [projects/fintech/trade-finance-supply-chain-platform](./projects/fintech/trade-finance-supply-chain-platform/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate importer/exporter onboarding, trade-document verification, letters of credit, invoice and purchase-order finance workflows, explainable risk scoring, lender facility checks, maker-checker approvals, simulated funding and settlement, and audit events.  
-**Status:** Portfolio prototype published; CI verification pending. Funding and settlement are simulated; no live lender or bank integrations.
+**Status:** Prototype published; 13 automated tests, TypeScript check and build passed in GitHub Actions. Funding and settlement are simulated; no live lender or bank integrations.
