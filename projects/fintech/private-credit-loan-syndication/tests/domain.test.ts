@@ -1,0 +1,4 @@
+import {it,expect} from "vitest";import {PrivateCredit} from "../src/lending";
+it("requires a verified borrower before an application",()=>{const s=new PrivateCredit();const p=s.createParty({name:"Borrower Ltd",kind:"borrower",jurisdiction:"GB"});expect(()=>s.submitApplication({borrowerId:p.id,name:"Facility",purpose:"Working capital",currency:"GBP",amount:10000,termMonths:12,rateBps:500,actor:"ops"})).toThrow();});
+it("requires independent verification",()=>{const s=new PrivateCredit();const p=s.createParty({name:"Lender Ltd",kind:"lender",jurisdiction:"GB"});expect(()=>s.verifyParty(p.id,p.id)).toThrow();expect(s.verifyParty(p.id,"reviewer").verified).toBe(true);});
+it("records collateral and audit events",()=>{const s=new PrivateCredit();const b=s.createParty({name:"Borrower Ltd",kind:"borrower",jurisdiction:"GB"});s.verifyParty(b.id,"reviewer");expect(s.listAudit().length).toBe(2);});
