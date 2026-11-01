@@ -14,6 +14,7 @@ export class FundAdministration{
  private event(entity:string,entityId:string,action:string,actor:string,details:Record<string,string|number|boolean>={}){this.audit.push({id:randomUUID(),entity,entityId,action,actor,at:new Date().toISOString(),details});}
  createPerson(input:{name:string;kind:"gp"|"lp";jurisdiction:string}){if(!input.name.trim()||input.jurisdiction.length!==2)throw new Error("Valid person details required");const p:Person={...input,id:randomUUID(),verified:false,createdAt:new Date().toISOString()};this.people.set(p.id,p);this.event("person",p.id,"created","system",{kind:p.kind});return {...p};}
  verifyPerson(id:string,reviewer:string){const p=this.people.get(id);if(!p)throw new Error("Person not found");if(!reviewer||reviewer===id)throw new Error("Independent reviewer required");p.verified=true;this.event("person",id,"verified",reviewer);return {...p};}
+ listPeople(){return [...this.people.values()].map(p=>({...p}));}
  createFund(input:{name:string;vehicle:"fund"|"spv";currency:Currency;targetMinor:number;managementFeeBps:number;carryBps:number;hurdleBps:number;gpId:string},actor:string){
   const gp=this.people.get(input.gpId);if(!gp||gp.kind!=="gp"||!gp.verified)throw new Error("Verified GP required");
   if(!input.name.trim()||![input.targetMinor,input.managementFeeBps,input.carryBps,input.hurdleBps].every(Number.isSafeInteger)||input.targetMinor<=0||input.managementFeeBps<0||input.managementFeeBps>10000||input.carryBps<0||input.carryBps>10000||input.hurdleBps<0||input.hurdleBps>10000)throw new Error("Invalid fund terms");
