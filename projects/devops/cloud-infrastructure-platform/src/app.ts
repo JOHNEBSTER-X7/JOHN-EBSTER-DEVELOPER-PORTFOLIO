@@ -9,6 +9,26 @@ export const app=express();app.use(helmet());app.use(express.json({limit:"16kb"}
 const limiter=rateLimit({windowMs:60000,limit:25,standardHeaders:"draft-8",legacyHeaders:false});
 const schema=z.object({serviceId:z.string().min(2),environment:z.enum(["development","staging","production"]),version:z.string().min(1).max(50),requestedBy:z.string().trim().min(2).max(80)});
 app.get("/api/health",(_req,res)=>res.json({status:"ok",service:"northstar-cloud-platform",timestamp:new Date().toISOString()}));
+app.get("/api/metrics",(_req,res)=>{const m=dashboard();res.type("text/plain; version=0.0.4; charset=utf-8").send([
+ "# HELP northstar_services_total Number of registered services",
+ "# TYPE northstar_services_total gauge",
+ "northstar_services_total "+m.services,
+ "# HELP northstar_services_healthy Number of healthy services",
+ "# TYPE northstar_services_healthy gauge",
+ "northstar_services_healthy "+m.healthy,
+ "# HELP northstar_services_degraded Number of degraded services",
+ "# TYPE northstar_services_degraded gauge",
+ "northstar_services_degraded "+m.degraded,
+ "# HELP northstar_deployments_pending_approval Number of releases awaiting approval",
+ "# TYPE northstar_deployments_pending_approval gauge",
+ "northstar_deployments_pending_approval "+m.pending,
+ "# HELP northstar_deployments_completed_total Number of simulated deployments completed",
+ "# TYPE northstar_deployments_completed_total counter",
+ "northstar_deployments_completed_total "+m.deployed,
+ "# HELP northstar_operational_events_total Number of retained operational events",
+ "# TYPE northstar_operational_events_total gauge",
+ "northstar_operational_events_total "+m.events
+ ].join("\\n")+"\\n");});
 app.get("/api/dashboard",(_req,res)=>res.json({metrics:dashboard(),services:getServices(),recentEvents:getEvents()}));
 app.get("/api/services",(_req,res)=>res.json(getServices()));
 app.get("/api/deployments",(_req,res)=>res.json(getDeployments()));
