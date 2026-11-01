@@ -1,0 +1,39 @@
+name: Enterprise Research Intelligence CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "projects/ai/enterprise-research-intelligence/**"
+      - ".github/workflows/enterprise-research-intelligence-ci.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "projects/ai/enterprise-research-intelligence/**"
+      - ".github/workflows/enterprise-research-intelligence-ci.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/ai/enterprise-research-intelligence
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: projects/ai/enterprise-research-intelligence/package.json
+      - name: Install dependencies
+        run: npm install
+      - name: Type-check
+        run: npm run typecheck
+      - name: Run tests
+        run: npm test
+      - name: Build
+        run: npm run build
