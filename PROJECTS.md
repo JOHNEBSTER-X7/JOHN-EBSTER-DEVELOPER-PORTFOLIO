@@ -196,4 +196,4 @@ A project only advances to a stronger status when evidence is available.
 Path: `projects/fintech/banking-integration-gateway/`  
 Stack: TypeScript, Express, Zod, Vitest and Supertest.  
 Scope: Authenticated domain event ingestion, versioned contracts, idempotency, simulated routing, retry/dead-letter handling and audit records.  
-Status: Prototype published; CI verification pending. No external services are connected.
+Status: Prototype published; 18 automated tests, TypeScript check and build passed in GitHub Actions. No external services are connected.
