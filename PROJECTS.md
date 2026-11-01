@@ -127,3 +127,10 @@ A project only advances to a stronger status when evidence is available.
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate multi-currency treasury positions, dated liquidity forecasts, GBP FX exposure, scenario stress tests, counterparty limits and maker-checker transaction approvals.  
 **Status:** Prototype published; 13 automated tests, TypeScript check and build passed in GitHub Actions. Uses synthetic balances and illustrative static FX rates; not connected to banks or live markets.
+
+
+### Northstar Institutional Trade Finance & Supply Chain Finance Platform
+**Path:** [projects/fintech/trade-finance-supply-chain-platform](./projects/fintech/trade-finance-supply-chain-platform/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate importer/exporter onboarding, trade-document verification, letters of credit, invoice and purchase-order finance workflows, explainable risk scoring, lender facility checks, maker-checker approvals, simulated funding and settlement, and audit events.  
+**Status:** Portfolio prototype published; CI verification pending. Funding and settlement are simulated; no live lender or bank integrations.
