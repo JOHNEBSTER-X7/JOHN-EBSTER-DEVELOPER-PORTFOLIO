@@ -1,0 +1,14 @@
+services:
+  northstar-ops:
+    build: .
+    ports:
+      - "3400:3400"
+    environment:
+      NODE_ENV: production
+      PORT: 3400
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
