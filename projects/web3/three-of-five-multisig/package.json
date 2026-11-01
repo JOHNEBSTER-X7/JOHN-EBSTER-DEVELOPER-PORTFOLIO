@@ -1,0 +1,16 @@
+{
+  "name": "three-of-five-multisig",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Educational 3-of-5 native-asset multisignature wallet",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "test:coverage": "hardhat coverage"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.0",
+    "solidity-coverage": "^0.8.14"
+  }
+}
