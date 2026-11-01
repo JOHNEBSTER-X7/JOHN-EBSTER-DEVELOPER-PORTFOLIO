@@ -1,0 +1,11 @@
+aws_region          = "eu-west-2"
+project_name        = "northstar-cloud-platform"
+environment         = "production"
+desired_count       = 0
+image_tag           = "latest"
+container_port      = 3400
+health_check_path   = "/api/health"
+vpc_cidr            = "10.42.0.0/16"
+public_subnet_cidrs = ["10.42.1.0/24", "10.42.2.0/24"]
+task_cpu            = 256
+task_memory         = 512
