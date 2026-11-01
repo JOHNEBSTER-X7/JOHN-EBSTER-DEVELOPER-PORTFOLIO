@@ -1,0 +1,24 @@
+import {beforeEach,describe,it,expect} from "vitest";
+import {FraudIntelligenceService,TxnInput} from "../src/service";
+describe("Fraud intelligence engine",()=>{
+ let s:FraudIntelligenceService;beforeEach(()=>{s=new FraudIntelligenceService();});
+ const tx=(over:Partial<TxnInput>={}):TxnInput=>({reference:"r-1",customerId:"cust-1",accountId:"acct-1",amountMinor:12000,currency:"GBP",direction:"debit",counterpartyId:"merchant-1",counterpartyName:"Demo Merchant",country:"GB",channel:"mobile",deviceId:"device-a",ipCountry:"GB",occurredAt:"2026-10-01T10:00:00.000Z",...over});
+ it("scores ordinary activity as low risk",()=>{const t=s.ingest(tx());expect(t.riskScore).toBe(0);expect(t.riskBand).toBe("low");expect(t.monitoringStatus).toBe("clear");});
+ it("is idempotent by transaction reference",()=>{const a=s.ingest(tx()),b=s.ingest(tx());expect(a.id).toBe(b.id);expect(s.transactions).toHaveLength(1);});
+ it("rejects invalid amount and missing identifiers",()=>{expect(()=>s.ingest(tx({amountMinor:0}))).toThrow(/positive integer/);expect(()=>s.ingest(tx({reference:" "}))).toThrow(/reference/);});
+ it("flags large value activity",()=>expect(s.ingest(tx({amountMinor:600000})).signals.map(x=>x.code)).toContain("LARGE_VALUE"));
+ it("flags synthetic high-risk country destinations",()=>expect(s.ingest(tx({country:"IR"})).riskBand).toBe("medium"));
+ it("flags geographic inconsistency",()=>expect(s.ingest(tx({ipCountry:"US"})).signals.map(x=>x.code)).toContain("GEO_MISMATCH"));
+ it("flags device change relative to earlier activity",()=>{s.ingest(tx());const t=s.ingest(tx({reference:"r-2",occurredAt:"2026-10-01T10:10:00.000Z",deviceId:"new-device"}));expect(t.signals.map(x=>x.code)).toContain("DEVICE_CHANGE");});
+ it("flags rapid transaction velocity",()=>{for(let i=0;i<4;i++)s.ingest(tx({reference:"v-"+i,occurredAt:new Date(Date.parse("2026-10-01T09:00:00Z")+i*60000).toISOString()}));const t=s.ingest(tx({reference:"v-final",occurredAt:"2026-10-01T09:30:00.000Z"}));expect(t.signals.map(x=>x.code)).toContain("VELOCITY_HIGH");});
+ it("flags repeated outgoing payment bursts",()=>{for(let i=0;i<3;i++)s.ingest(tx({reference:"d-"+i,occurredAt:new Date(Date.parse("2026-10-01T09:00:00Z")+i*60000).toISOString()}));expect(s.ingest(tx({reference:"d-final",occurredAt:"2026-10-01T09:30:00Z"})).signals.map(x=>x.code)).toContain("DEBIT_BURST");});
+ it("detects shared counterparty networks across customers",()=>{s.ingest(tx({customerId:"cust-a",reference:"n-1"}));s.ingest(tx({customerId:"cust-b",reference:"n-2"}));const t=s.ingest(tx({customerId:"cust-c",reference:"n-3"}));expect(t.signals.map(x=>x.code)).toContain("SHARED_COUNTERPARTY");expect(s.network()[0].customerCount).toBe(3);});
+ it("creates a case for medium-or-higher risk alerts",()=>{const t=s.ingest(tx({country:"IR"}));expect(s.cases).toHaveLength(1);expect(s.cases[0].transactionId).toBe(t.id);});
+ it("does not create cases for low-risk transactions",()=>{s.ingest(tx());expect(s.cases).toHaveLength(0);});
+ it("assigns a case and records analyst activity",()=>{const t=s.ingest(tx({country:"IR"}));const c=s.assignCase(s.cases[0].id,"analyst-1");expect(c.status).toBe("investigating");expect(c.assignedTo).toBe("analyst-1");expect(s.audit.some(a=>a.action==="case.assigned")).toBe(true);expect(t.monitoringStatus).toBe("alerted");});
+ it("adds case notes and escalates",()=>{s.ingest(tx({country:"IR"}));const id=s.cases[0].id;s.addNote(id,"analyst-1","Customer contact requested");expect(s.escalateCase(id,"analyst-1","Potential account takeover").status).toBe("escalated");});
+ it("closes a case with a recorded disposition",()=>{const t=s.ingest(tx({country:"IR"}));const c=s.closeCase(s.cases[0].id,"senior-reviewer","false_positive","Customer verified the payment");expect(c.status).toBe("closed");expect(c.disposition).toBe("false_positive");expect(t.monitoringStatus).toBe("closed");});
+ it("prevents editing a closed case",()=>{s.ingest(tx({country:"IR"}));const id=s.cases[0].id;s.closeCase(id,"reviewer","no_action","Reviewed and cleared");expect(()=>s.addNote(id,"analyst","Another note")).toThrow(/closed case/);});
+ it("returns risk, case and signal metrics",()=>{s.ingest(tx({country:"IR"}));const d=s.dashboard();expect(d.transactionCount).toBe(1);expect(d.caseCount).toBe(1);expect(d.alertRate).toBe(1);expect(d.topSignalCodes.length).toBeGreaterThan(0);});
+ it("supports explicit escalation and case closure state",()=>{s.ingest(tx({country:"IR"}));const c=s.escalateCase(s.cases[0].id,"analyst","Urgent review");expect(c.status).toBe("escalated");expect(()=>s.escalateCase(c.id,"analyst","Again")).not.toThrow();});
+});
