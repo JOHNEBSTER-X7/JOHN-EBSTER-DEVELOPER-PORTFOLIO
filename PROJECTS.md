@@ -18,17 +18,21 @@ This index distinguishes working software from planned work. Status labels are d
 **Goal:** Provide a small REST API for browsing and scoring illustrative market signals.  
 **Status:** Prototype; 7 tests passed in GitHub Actions. Included sample signals are synthetic; heuristic scores are not validated investment or forecasting outputs.
 
+## AI engineering
+
+### Northstar Document Intelligence — RAG
+**Path:** [projects/ai/document-intelligence-rag](./projects/ai/document-intelligence-rag/)  
+**Stack:** Python, FastAPI, SQLite, pypdf, pytest, Docker  
+**Goal:** Ingest PDF/TXT/Markdown files, chunk and index their text, retrieve relevant passages and return document/page/chunk citations.  
+**Status:** Retrieval-first prototype; 9 tests passed in GitHub Actions. Uses lexical token overlap, not embeddings or LLM-generated answers. No authentication or production data safeguards are implemented.
+
 ## Full-stack applications
 
 ### Northstar CRM — Enterprise Contact & Sales Workspace
 **Path:** [projects/full-stack/enterprise-crm](./projects/full-stack/enterprise-crm/)  
 **Stack:** Next.js, React, TypeScript, PostgreSQL, Prisma, Zod  
 **Goal:** Demonstrate contact creation, search, filtering, status management, REST API design and relational persistence.  
-**Status:** Initial implementation published. GitHub Actions type-check workflow is configured; successful CI status and database-backed runtime are not yet verified.
-
-## AI engineering
-
-Planned project area. Candidate work includes document Q&A/RAG, an AI support assistant and a research workflow with source attribution.
+**Status:** Initial implementation published; GitHub Actions type-check workflow passed. Database-backed runtime and deployment are not verified. Demo only: no authentication or tenant isolation.
 
 ## Cloud and DevOps
 
