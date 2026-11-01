@@ -51,7 +51,7 @@ export class Exchange {
   const wallet=this.wallets.get(input.accountId)??{base:0,quote:0};
   if(input.side==="buy"){
    const reservePrice=input.type==="limit"?input.price!:this.bestAsk(input.symbol)?.price;
-   if(reservePrice===undefined)throw new Error("No liquidity for market order");
+   if(reservePrice==null)throw new Error("No liquidity for market order");
    const required=input.quantity*reservePrice;
    if(wallet.quote<required)throw new Error("Insufficient quote balance");
   }else if(wallet.base<input.quantity)throw new Error("Insufficient base balance");
