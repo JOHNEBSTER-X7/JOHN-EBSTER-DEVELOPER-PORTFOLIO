@@ -1,0 +1,20 @@
+import {beforeEach,describe,expect,it} from "vitest";
+import request from "supertest";
+import {app} from "../src/app";
+import {resetDocuments,chunkText} from "../src/retrieval";
+import {resetReports} from "../src/research-service";
+beforeEach(()=>{resetDocuments();resetReports();delete process.env.TAVILY_API_KEY;});
+describe("Enterprise research intelligence API",()=>{
+ it("returns health status",async()=>{const r=await request(app).get("/api/health");expect(r.status).toBe(200);expect(r.body.status).toBe("ok");});
+ it("splits long text into overlapping chunks",()=>{expect(chunkText("alpha beta gamma delta epsilon zeta eta theta",18,4).length).toBeGreaterThan(1);});
+ it("rejects invalid chunk parameters",()=>{expect(()=>chunkText("example",10,10)).toThrow();});
+ it("uploads a text document",async()=>{const r=await request(app).post("/api/documents").attach("file",Buffer.from("The UK software market includes cloud platforms and AI services."),"market.txt");expect(r.status).toBe(201);expect(r.body.chunks).toBe(1);});
+ it("lists uploaded documents",async()=>{await request(app).post("/api/documents").attach("file",Buffer.from("Company strategy and customer retention."),"strategy.md");const r=await request(app).get("/api/documents");expect(r.body[0].filename).toBe("strategy.md");});
+ it("rejects unsupported upload formats",async()=>{const r=await request(app).post("/api/documents").attach("file",Buffer.from("bad"),"archive.exe");expect(r.status).toBe(415);});
+ it("rejects empty documents",async()=>{const r=await request(app).post("/api/documents").attach("file",Buffer.from("   "),"empty.txt");expect(r.status).toBe(422);});
+ it("returns insufficient evidence when no sources exist",async()=>{const r=await request(app).post("/api/research").send({query:"Assess the UK enterprise software market."});expect(r.status).toBe(201);expect(r.body.status).toBe("insufficient_evidence");expect(r.body.sources).toHaveLength(0);});
+ it("retrieves uploaded passages with source references",async()=>{await request(app).post("/api/documents").attach("file",Buffer.from("Cloud software adoption is increasing among small UK businesses."),"survey.txt");const r=await request(app).post("/api/research").send({query:"Analyse cloud software adoption among UK businesses."});expect(r.body.status).toBe("completed");expect(r.body.sources[0].title).toContain("survey.txt");});
+ it("rejects a short research question",async()=>{const r=await request(app).post("/api/research").send({query:"short"});expect(r.status).toBe(400);});
+ it("exports a report as Markdown",async()=>{const report=(await request(app).post("/api/research").send({query:"Review the competitive position of a retail business."})).body;const r=await request(app).get("/api/reports/"+report.id+"/export");expect(r.status).toBe(200);expect(r.headers["content-type"]).toContain("text/markdown");});
+ it("returns 404 for an unknown report",async()=>{const r=await request(app).get("/api/reports/not-a-real-id");expect(r.status).toBe(404);});
+});
