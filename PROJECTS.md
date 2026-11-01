@@ -40,6 +40,12 @@ This index distinguishes working software from planned work. Status labels are d
 **Goal:** Demonstrate contact creation, search, filtering, status management, REST API design and relational persistence.  
 **Status:** Initial implementation published; GitHub Actions type-check workflow passed. Database-backed runtime and deployment are not verified. Demo only: no authentication or tenant isolation.
 
+### Northstar Multi-Agent Business Automation
+**Path:** [projects/ai/multi-agent-business-automation](./projects/ai/multi-agent-business-automation/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest  
+**Goal:** Coordinate research, business analysis, writing and quality-review agents through a typed workflow with a human approval gate.  
+**Status:** Initial implementation published. CI verification pending. Agent execution is deterministic and uses the supplied brief only; workflow state is in-memory and no external action is executed.
+
 ## Cloud and DevOps
 
 Planned project area. Candidate work includes containerised services, CI pipelines and serverless processing.
