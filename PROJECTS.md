@@ -50,7 +50,7 @@ This index distinguishes working software from planned work. Status labels are d
 **Path:** [projects/ai/enterprise-research-intelligence](./projects/ai/enterprise-research-intelligence/)  
 **Stack:** TypeScript, Node.js, Express, Tavily API adapter, PDF extraction, lexical retrieval, Vitest  
 **Goal:** Combine optional live web search with uploaded documents, evidence retrieval, source registers, research reports and Markdown export.  
-**Status:** Initial implementation published. CI verification pending. Live search requires a Tavily API key; without it, only uploaded documents are searched. Relevance scores are not credibility ratings.
+**Status:** Prototype published; TypeScript check, 12 tests and production build passed in GitHub Actions. Live search requires a Tavily API key; without it, only uploaded documents are searched. Relevance scores are not credibility ratings.
 
 ## Cloud and DevOps
 
