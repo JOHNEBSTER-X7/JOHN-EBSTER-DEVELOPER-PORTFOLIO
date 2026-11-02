@@ -230,3 +230,11 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate user lifecycle, scrypt password hashing, expiring/revocable sessions, role permissions, resource-scoped policies, maker-checker role approvals, scoped API keys and audit events.  
 **Status:** Prototype published; 21 automated tests, TypeScript check and production build passed in GitHub Actions. In-memory demo; MFA is an enforcement flag only and administrative routes are not protected by authentication middleware.
+ 
+## Financial technology
+
+### Northstar Institutional Banking Security Operations & Threat Intelligence
+**Path:** [projects/fintech/banking-security-operations-threat-intelligence](./projects/fintech/banking-security-operations-threat-intelligence/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate security-event ingestion, explainable detections, threat-indicator matching, incident workflows, vulnerability tracking, dry-run response playbooks and audit reporting.  
+**Status:** Prototype published; CI verification pending. Uses in-memory state and synthetic/manual inputs; no live SIEM, threat-feed, EDR or SOAR integrations. Response actions are simulations only.
