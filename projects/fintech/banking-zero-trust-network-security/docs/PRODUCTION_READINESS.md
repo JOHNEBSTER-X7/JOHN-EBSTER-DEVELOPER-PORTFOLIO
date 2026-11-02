@@ -1,0 +1,5 @@
+# Production readiness assessment
+
+Not production-ready. Required work includes authenticated administrative APIs and RBAC; persistent and encrypted storage; cryptographic device attestation; certificate issuance and rotation for workload identities; mTLS; real identity-provider integration; policy priority and conflict analysis; policy approval and rollback; network topology discovery; actual firewall, SDN, cloud security group or service-mesh enforcement; packet/flow telemetry ingestion; alerting; high availability; secrets management; tamper-evident audit; tenant isolation; rate limiting; observability; backup and disaster recovery; threat modelling; penetration testing and independent security review.
+
+No traffic is blocked or permitted by a network device. Decisions are returned as prototype evaluations based solely on caller-submitted metadata.
