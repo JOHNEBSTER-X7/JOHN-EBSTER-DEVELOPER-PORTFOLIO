@@ -238,3 +238,9 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate security-event ingestion, explainable detections, threat-indicator matching, incident workflows, vulnerability tracking, dry-run response playbooks and audit reporting.  
 **Status:** Prototype; 14 CI tests passed, TypeScript check and build passed in [GitHub Actions](https://github.com/JOHNEBSTER-X7/JOHN-EBSTER-DEVELOPER-PORTFOLIO/actions/runs/41405679328). Uses in-memory state and synthetic/manual inputs; no live SIEM, threat-feed, EDR or SOAR integrations. Response actions are simulations only.
+
+### Northstar Institutional Banking Network Security & Zero Trust Architecture
+**Path:** [projects/fintech/banking-zero-trust-network-security](./projects/fintech/banking-zero-trust-network-security/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate device trust assessments, SPIFFE-style workload identities, network segmentation policies, default-deny flow evaluation, and audit reporting.  
+**Status:** Prototype published; CI verification pending. All enforcement is simulated; no real network controls or device attestation are connected.
