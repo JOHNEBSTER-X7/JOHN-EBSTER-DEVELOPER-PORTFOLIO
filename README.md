@@ -87,3 +87,5 @@ For professional enquiries, contact me through my GitHub profile: [github.com/JO
 | [Northstar Banking Integration Gateway & Event Bus](./projects/fintech/banking-integration-gateway/) | TypeScript / Express / Event contracts / Authenticated API / Idempotent routing | Prototype published; 18 automated tests, TypeScript check and build passed in GitHub Actions. Consumer destinations remain simulated. |
 
 | [Northstar Institutional Event Streaming & Banking Data Platform](./projects/fintech/banking-event-streaming-platform/) | TypeScript / Append-only event log / Schema registry / Consumer offsets / Replay | Prototype published; 23 automated tests, TypeScript check and build passed in GitHub Actions. Single-node local storage; no distributed broker. |
+
+| [Northstar Institutional Banking Data Warehouse & Regulatory Reporting](./projects/fintech/banking-data-warehouse-regulatory-reporting/) | TypeScript / Express / Banking MI / Data quality / Lineage / CSV exports | Prototype published; CI verification pending. Synthetic data only; no official regulatory filing or live source integrations. |
