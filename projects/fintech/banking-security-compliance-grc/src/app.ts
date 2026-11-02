@@ -1,0 +1,25 @@
+import express from "express";
+import {z} from "zod";
+import {GrcService} from "./service";
+const level=z.enum(["low","medium","high","critical"]);
+const actor=(q:express.Request)=>q.header("x-actor")??"api-client";
+export function createApp(service:GrcService){const app=express();app.use(express.json({limit:"1mb"}));
+app.get("/health",(_q,s)=>s.json({status:"ok",service:"northstar-banking-grc"}));
+app.get("/api/summary",(_q,s)=>s.json(service.summary()));
+app.get("/api/controls",(_q,s)=>s.json(service.listControls()));
+app.patch("/api/controls/:id/assessment",(q,s)=>{const p=z.object({status:z.enum(["not_assessed","effective","needs_improvement","ineffective"]),owner:z.string().min(2)}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.assessControl(q.params.id,p.data.status,p.data.owner,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.get("/api/risks",(_q,s)=>s.json(service.listRisks()));
+app.post("/api/risks",(q,s)=>{const p=z.object({title:z.string().min(3),description:z.string().min(5),category:z.string().min(2),likelihood:z.number().int().min(1).max(5),impact:z.number().int().min(1).max(5),residualScore:z.number().int().min(1).max(25),owner:z.string().min(2),treatment:z.string().min(3)}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.createRisk(p.data));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.patch("/api/risks/:id",(q,s)=>{const p=z.object({status:z.enum(["open","mitigating","accepted","closed"]).optional(),residualScore:z.number().int().min(1).max(25).optional(),owner:z.string().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.updateRisk(q.params.id,p.data,actor(q)));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.get("/api/evidence",(_q,s)=>s.json(service.listEvidence()));
+app.post("/api/evidence",(q,s)=>{const p=z.object({controlId:z.string(),title:z.string().min(3),reference:z.string().min(2),type:z.enum(["document","configuration","screenshot","attestation","other"]),period:z.string().min(2),submittedBy:z.string().min(2)}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.submitEvidence(p.data));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.patch("/api/evidence/:id/review",(q,s)=>{const p=z.object({status:z.enum(["accepted","rejected"]),note:z.string().min(3)}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.reviewEvidence(q.params.id,p.data.status,actor(q),p.data.note));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.get("/api/audits",(_q,s)=>s.json(service.listAudits()));
+app.post("/api/audits",(q,s)=>{const p=z.object({title:z.string().min(3),scope:z.string().min(3),framework:z.string().min(2),lead:z.string().min(2),startDate:z.string().min(8),endDate:z.string().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.status(201).json(service.createAudit(p.data));});
+app.patch("/api/audits/:id",(q,s)=>{const p=z.object({status:z.enum(["planned","in_progress","completed"])}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.updateAudit(q.params.id,p.data.status,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.get("/api/findings",(_q,s)=>s.json(service.listFindings()));
+app.post("/api/findings",(q,s)=>{const p=z.object({auditId:z.string(),controlId:z.string().optional(),title:z.string().min(3),severity:level,description:z.string().min(5),owner:z.string().min(2),dueDate:z.string().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.createFinding(p.data));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.patch("/api/findings/:id",(q,s)=>{const p=z.object({status:z.enum(["open","in_progress","remediated","risk_accepted"]),remediation:z.string().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.updateFinding(q.params.id,p.data,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.get("/api/framework-coverage",(_q,s)=>s.json(service.frameworkCoverage()));
+app.get("/api/audit-trail",(_q,s)=>s.json(service.auditTrail()));
+return app;}
