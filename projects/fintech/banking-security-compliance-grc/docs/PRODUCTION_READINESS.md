@@ -1,0 +1,5 @@
+# Production readiness assessment
+
+Not production-ready. Required additions include authenticated identity and enforced RBAC; durable encrypted database; tenant and legal-entity scoping; authoritative and versioned framework libraries; obligation applicability analysis; evidence upload, malware scanning, access controls and retention; independent review and approvals; immutable audit logs; risk appetite and calibrated scoring; workflow notifications and escalation; segregation of duties; reporting exports; data lineage; backups and disaster recovery; secrets management; rate limiting; observability; privacy controls; threat modelling and independent security testing.
+
+Framework mappings are demonstrative. The application does not issue compliance attestations, regulatory submissions or certification decisions.
