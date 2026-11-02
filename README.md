@@ -89,3 +89,5 @@ For professional enquiries, contact me through my GitHub profile: [github.com/JO
 | [Northstar Institutional Event Streaming & Banking Data Platform](./projects/fintech/banking-event-streaming-platform/) | TypeScript / Append-only event log / Schema registry / Consumer offsets / Replay | Prototype published; 23 automated tests, TypeScript check and build passed in GitHub Actions. Single-node local storage; no distributed broker. |
 
 | [Northstar Institutional Banking Data Warehouse & Regulatory Reporting](./projects/fintech/banking-data-warehouse-regulatory-reporting/) | TypeScript / Express / Banking MI / Data quality / Lineage / CSV exports | Prototype published; 17 automated tests, TypeScript check and production build passed in GitHub Actions. Synthetic data only; no official regulatory filing or live source integrations. |
+
+| [Northstar Institutional Banking Data Governance, Metadata & Data Quality](./projects/fintech/banking-data-governance-platform/) | TypeScript / Express / Dataset catalogue / Schema governance / Quality rules / Lineage | Prototype published; CI verification pending. In-memory demo; no production access controls. |
