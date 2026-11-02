@@ -2,11 +2,11 @@ name: Regulatory Data Validation CI
 on:
   push:
     paths:
-      - 'projects/fintech/banking-regulatory-data-validation/**'
+      - 'projects/fintech/banking-regulatory-data-validation-reconciliation/**'
       - '.github/workflows/banking-regulatory-data-validation-ci.yml'
   pull_request:
     paths:
-      - 'projects/fintech/banking-regulatory-data-validation/**'
+      - 'projects/fintech/banking-regulatory-data-validation-reconciliation/**'
       - '.github/workflows/banking-regulatory-data-validation-ci.yml'
   workflow_dispatch:
 jobs:
@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: projects/fintech/banking-regulatory-data-validation
+        working-directory: projects/fintech/banking-regulatory-data-validation-reconciliation
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
