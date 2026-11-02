@@ -1,0 +1,1 @@
+import {createApp} from "./app";import {GovernanceService} from "./service";const g=new GovernanceService();const port=Number(process.env.PORT??3820);createApp(g).listen(port,()=>console.log("Northstar Data Governance listening on "+port));
