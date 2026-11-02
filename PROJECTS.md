@@ -263,4 +263,4 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Path:** [projects/fintech/banking-regulatory-data-validation-reconciliation](./projects/fintech/banking-regulatory-data-validation-reconciliation/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate configurable validation rules, exception management, cross-source reconciliation with tolerance thresholds, submission-readiness gates and audit events.  
-**Status:** Prototype published; CI verification in progress. Synthetic/demo data only; no live regulatory submission.
+**Status:** Prototype published; 21 automated tests, TypeScript check and production build passed in [GitHub Actions](https://github.com/JOHNEBSTER-X7/JOHN-EBSTER-DEVELOPER-PORTFOLIO/actions/runs/41408062048). Synthetic/demo data only; no live regulatory submission.
