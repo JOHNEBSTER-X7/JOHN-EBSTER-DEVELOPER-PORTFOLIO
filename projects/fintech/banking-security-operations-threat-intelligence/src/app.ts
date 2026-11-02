@@ -1,0 +1,23 @@
+import express from "express";
+import {z} from "zod";
+import {SecurityOperationsService} from "./service";
+const sev=z.enum(["low","medium","high","critical"]);
+const actor=(q:express.Request)=>q.header("x-actor")??"api-client";
+export function createApp(service:SecurityOperationsService){const app=express();app.use(express.json({limit:"1mb"}));
+app.get("/health",(_q,s)=>s.json({status:"ok",service:"northstar-banking-security-operations"}));
+app.get("/api/summary",(_q,s)=>s.json(service.summary()));
+app.get("/api/events",(_q,s)=>s.json(service.listEvents()));
+app.post("/api/events",(q,s)=>{const p=z.object({source:z.string().min(1),eventType:z.string().min(1),actor:z.string().min(1),ip:z.string().optional(),resource:z.string().optional(),outcome:z.enum(["success","failure"]).optional(),occurredAt:z.string().optional(),details:z.record(z.unknown()).optional(),externalId:z.string().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.status(201).json(service.ingest(p.data));});
+app.get("/api/rules",(_q,s)=>s.json(service.listRules()));
+app.post("/api/rules",(q,s)=>{const p=z.object({name:z.string().min(2),eventType:z.string().optional(),outcome:z.string().optional(),actorContains:z.string().optional(),ip:z.string().optional(),severity:sev,score:z.number().min(0).max(100),description:z.string().min(3),enabled:z.boolean().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.status(201).json(service.addRule(p.data));});
+app.patch("/api/rules/:id",(q,s)=>{const p=z.object({enabled:z.boolean()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.setRuleEnabled(q.params.id,p.data.enabled));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.get("/api/indicators",(_q,s)=>s.json(service.listIndicators()));
+app.post("/api/indicators",(q,s)=>{const p=z.object({type:z.enum(["ip","domain","hash"]),value:z.string().min(1),confidence:z.number().min(0).max(100),source:z.string().min(2)}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.status(201).json(service.addIndicator(p.data));});
+app.get("/api/incidents",(_q,s)=>s.json(service.listIncidents()));
+app.patch("/api/incidents/:id",(q,s)=>{const p=z.object({status:z.enum(["open","investigating","contained","resolved","closed"]).optional(),owner:z.string().optional(),note:z.string().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.updateIncident(q.params.id,p.data,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.post("/api/incidents/:id/playbooks",(q,s)=>{const p=z.object({playbook:z.enum(["collect_evidence","notify_owner","isolate_asset_dry_run"])}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.simulatePlaybook(q.params.id,p.data.playbook,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.get("/api/vulnerabilities",(_q,s)=>s.json(service.listVulnerabilities()));
+app.post("/api/vulnerabilities",(q,s)=>{const p=z.object({asset:z.string().min(1),title:z.string().min(3),severity:sev,cvss:z.number().min(0).max(10),dueDate:z.string().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.createVulnerability(p.data,actor(q)));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.patch("/api/vulnerabilities/:id",(q,s)=>{const p=z.object({status:z.enum(["open","in_progress","accepted","remediated"])}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.updateVulnerability(q.params.id,p.data.status,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.get("/api/audit",(_q,s)=>s.json(service.auditTrail()));
+return app;}
