@@ -204,3 +204,9 @@ Path: `projects/fintech/banking-event-streaming-platform/`
 Stack: TypeScript, Node.js, Express, Zod, append-only JSONL persistence, Vitest and Supertest.  
 Scope: Versioned event schemas, persistent event offsets, consumer groups, sequential acknowledgements, replay, failure tracking and dead-letter monitoring.  
 Status: Prototype published; 23 automated tests, TypeScript check and build passed in GitHub Actions. Local single-node persistence; not a distributed message broker.
+
+### Northstar Institutional Banking Data Warehouse & Regulatory Reporting
+**Path:** [projects/fintech/banking-data-warehouse-regulatory-reporting](./projects/fintech/banking-data-warehouse-regulatory-reporting/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Consolidate canonical banking records into executive, payments, treasury, fraud/AML, reconciliation and operational reports, with data-quality checks, source lineage, audit and CSV/JSON exports.  
+**Status:** Prototype published; CI verification pending. Synthetic fixtures only; no live integrations, durable warehouse, official regulatory returns or production access controls.
