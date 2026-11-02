@@ -237,4 +237,4 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Path:** [projects/fintech/banking-security-operations-threat-intelligence](./projects/fintech/banking-security-operations-threat-intelligence/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate security-event ingestion, explainable detections, threat-indicator matching, incident workflows, vulnerability tracking, dry-run response playbooks and audit reporting.  
-**Status:** Prototype published; CI verification pending. Uses in-memory state and synthetic/manual inputs; no live SIEM, threat-feed, EDR or SOAR integrations. Response actions are simulations only.
+**Status:** Prototype; 14 CI tests passed, TypeScript check and build passed in [GitHub Actions](https://github.com/JOHNEBSTER-X7/JOHN-EBSTER-DEVELOPER-PORTFOLIO/actions/runs/41405679328). Uses in-memory state and synthetic/manual inputs; no live SIEM, threat-feed, EDR or SOAR integrations. Response actions are simulations only.
