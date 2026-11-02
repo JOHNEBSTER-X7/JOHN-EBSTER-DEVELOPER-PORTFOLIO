@@ -1,0 +1,24 @@
+{
+  "name": "northstar-banking-regulatory-data-validation",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "ts-node src/server.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.10",
+    "@types/supertest": "^7.0.0",
+    "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  }
+}
