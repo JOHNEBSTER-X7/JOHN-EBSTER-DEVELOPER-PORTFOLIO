@@ -4,7 +4,7 @@ import {createApp} from "../src/app";
 import {ReportingService} from "../src/service";
 describe("Northstar regulatory reporting",()=>{
  it("serves health and dashboard",async()=>{const a=createApp();expect((await request(a).get("/health")).body.status).toBe("ok");expect((await request(a).get("/api/dashboard")).body.activeObligations).toBe(2);});
- it("creates obligations and rejects duplicate entity/code",()=>{const s=new ReportingService();const o=s.listObligations()[0];expect(()=>s.createObligation({...o,id:undefined as never}, "tester")).toThrow();});
+ it("creates obligations and rejects duplicate entity/code",()=>{const s=new ReportingService();const o=s.listObligations()[0];expect(()=>s.createObligation({code:o.code,title:o.title,jurisdiction:o.jurisdiction,entity:o.entity,description:o.description,frequency:o.frequency,owner:o.owner,dueDate:o.dueDate,status:o.status,sourceLabel:o.sourceLabel}, "tester")).toThrow();});
  it("creates a report against an active obligation",()=>{const s=new ReportingService();const o=s.listObligations()[0];const r=s.createReport({obligationId:o.id,period:"2026-Q4",dueDate:"2026-12-15",owner:"Maker",data:{}}, "Maker");expect(r.status).toBe("draft");});
  it("rejects reports for unknown obligations",()=>{const s=new ReportingService();expect(()=>s.createReport({obligationId:"bad",period:"Q4",dueDate:"2026-12-01",owner:"A",data:{}}, "A")).toThrow("Active obligation not found");});
  it("validates required report fields",()=>{const s=new ReportingService();const o=s.listObligations()[0];const r=s.createReport({obligationId:o.id,period:"Q4",dueDate:"2026-12-01",owner:"Maker",data:{}}, "Maker");const result=s.validateReport(r.id,"Maker");expect(result.valid).toBe(false);expect(result.errors).toHaveLength(4);});
