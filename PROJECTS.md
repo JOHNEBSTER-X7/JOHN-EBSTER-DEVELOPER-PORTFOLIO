@@ -264,3 +264,10 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate configurable validation rules, exception management, cross-source reconciliation with tolerance thresholds, submission-readiness gates and audit events.  
 **Status:** Prototype published; 21 automated tests, TypeScript check and production build passed in [GitHub Actions](https://github.com/JOHNEBSTER-X7/JOHN-EBSTER-DEVELOPER-PORTFOLIO/actions/runs/41408062048). Synthetic/demo data only; no live regulatory submission.
+
+
+### Northstar Institutional Banking Regulatory Reporting Automation & Workflow Orchestration
+**Path:** [projects/fintech/banking-regulatory-reporting-workflow-orchestration](./projects/fintech/banking-regulatory-reporting-workflow-orchestration/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Orchestrate obligation schedules, eight-step reporting tasks, evidence checkpoints, reporting-pack generation, maker-checker review, approvals, controlled submission records and audit events.  
+**Status:** Prototype published; CI verification in progress. Synthetic obligation catalogue; submission is local-only.
