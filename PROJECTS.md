@@ -215,4 +215,4 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Path:** [projects/fintech/banking-data-governance-platform](./projects/fintech/banking-data-governance-platform/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest  
 **Goal:** Govern banking dataset metadata, ownership, stewards, versioned schemas, quality rules, validation findings, remediation issues, lineage and audit.  
-**Status:** Prototype published; CI verification pending. In-memory state; no live integrations, access enforcement or regulatory certification.
+**Status:** Prototype published; 12 automated tests, TypeScript check and production build passed in GitHub Actions. In-memory state; no live integrations, access enforcement or regulatory certification.
