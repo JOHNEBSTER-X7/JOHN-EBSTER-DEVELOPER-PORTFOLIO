@@ -1,0 +1,26 @@
+name: Regulatory Reporting Workflow CI
+on:
+  push:
+    paths:
+      - 'projects/fintech/banking-regulatory-reporting-workflow-orchestration/**'
+      - '.github/workflows/banking-regulatory-reporting-workflow-ci.yml'
+  pull_request:
+    paths:
+      - 'projects/fintech/banking-regulatory-reporting-workflow-orchestration/**'
+      - '.github/workflows/banking-regulatory-reporting-workflow-ci.yml'
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/fintech/banking-regulatory-reporting-workflow-orchestration
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run build
