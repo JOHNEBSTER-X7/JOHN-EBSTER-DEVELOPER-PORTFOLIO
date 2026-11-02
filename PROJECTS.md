@@ -229,4 +229,4 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Path:** [projects/fintech/banking-identity-access-management](./projects/fintech/banking-identity-access-management/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate user lifecycle, scrypt password hashing, expiring/revocable sessions, role permissions, resource-scoped policies, maker-checker role approvals, scoped API keys and audit events.  
-**Status:** Prototype implementation committed; CI verification pending. In-memory demo; MFA is an enforcement flag only and administrative routes are not protected by authentication middleware.
+**Status:** Prototype published; 21 automated tests, TypeScript check and production build passed in GitHub Actions. In-memory demo; MFA is an enforcement flag only and administrative routes are not protected by authentication middleware.
