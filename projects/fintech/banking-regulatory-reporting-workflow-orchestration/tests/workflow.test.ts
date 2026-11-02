@@ -1,0 +1,25 @@
+import {describe,it,expect} from "vitest";import request from "supertest";import {WorkflowService} from "../src/service";import {createApp} from "../src/app";
+const schedule=(s:WorkflowService)=>s.schedule({obligationCode:"UK-SAMPLE-001",period:"2026-Q4",dueDate:"2026-12-15"},"maker");
+const finishCore=(s:WorkflowService,r:ReturnType<typeof schedule>)=>{for(let i=0;i<6;i++)s.updateTask(r.id,r.tasks[i].id,{status:"completed",note:i===4?"Evidence reviewed":undefined},"maker");};
+describe("Regulatory workflow orchestration",()=>{
+it("lists active obligations",()=>expect(new WorkflowService().listObligations()).toHaveLength(2));
+it("schedules an obligation run with eight dependent tasks",()=>{const r=schedule(new WorkflowService());expect(r.tasks).toHaveLength(8);expect(r.tasks[1].dependsOn).toEqual([r.tasks[0].id]);});
+it("rejects unknown obligation",()=>{const s=new WorkflowService();expect(()=>s.schedule({obligationCode:"NOPE",period:"Q4",dueDate:"2026-12-01"},"a")).toThrow("Active obligation");});
+it("rejects duplicate period runs",()=>{const s=new WorkflowService();schedule(s);expect(()=>schedule(s)).toThrow("already scheduled");});
+it("enforces task dependencies",()=>{const s=new WorkflowService(),r=schedule(s);expect(()=>s.updateTask(r.id,r.tasks[1].id,{status:"completed"},"a")).toThrow("Preceding task");});
+it("requires evidence disposition for exception task",()=>{const s=new WorkflowService(),r=schedule(s);for(let i=0;i<4;i++)s.updateTask(r.id,r.tasks[i].id,{status:"completed"},"a");expect(()=>s.updateTask(r.id,r.tasks[4].id,{status:"completed"},"a")).toThrow("Evidence");});
+it("completes core tasks and generates reporting pack",()=>{const s=new WorkflowService(),r=schedule(s);finishCore(s,r);const p=s.generatePack(r.id,"maker");expect(p.completedTasks).toBe(6);});
+it("blocks reporting pack before prerequisites",()=>{const s=new WorkflowService(),r=schedule(s);expect(()=>s.generatePack(r.id,"a")).toThrow("Core reporting tasks");});
+it("requires distinct independent reviewer",()=>{const s=new WorkflowService(),r=schedule(s);finishCore(s,r);s.generatePack(r.id,"maker");expect(()=>s.updateTask(r.id,r.tasks[6].id,{status:"completed"},"maker")).toThrow("Maker-checker");});
+it("requires all tasks before approval",()=>{const s=new WorkflowService(),r=schedule(s);finishCore(s,r);s.generatePack(r.id,"maker");expect(()=>s.approve(r.id,"checker")).toThrow("All workflow tasks");});
+it("approves after all tasks and pack",()=>{const s=new WorkflowService(),r=schedule(s);finishCore(s,r);s.generatePack(r.id,"maker");s.updateTask(r.id,r.tasks[6].id,{status:"completed"},"checker");s.updateTask(r.id,r.tasks[7].id,{status:"completed"},"checker");expect(s.approve(r.id,"controller").approvedBy).toBe("controller");});
+it("prevents submission before approval",()=>{const s=new WorkflowService(),r=schedule(s);expect(()=>s.submit(r.id,"submitter")).toThrow("approved");});
+it("records local submission after approval",()=>{const s=new WorkflowService(),r=schedule(s);finishCore(s,r);s.generatePack(r.id,"maker");s.updateTask(r.id,r.tasks[6].id,{status:"completed"},"checker");s.updateTask(r.id,r.tasks[7].id,{status:"completed"},"checker");s.approve(r.id,"controller");expect(s.submit(r.id,"submitter").submittedAt).toBeTruthy();});
+it("prevents duplicate submission",()=>{const s=new WorkflowService(),r=schedule(s);finishCore(s,r);s.generatePack(r.id,"maker");s.updateTask(r.id,r.tasks[6].id,{status:"completed"},"checker");s.updateTask(r.id,r.tasks[7].id,{status:"completed"},"checker");s.approve(r.id,"controller");s.submit(r.id,"submitter");expect(()=>s.submit(r.id,"submitter")).toThrow("already submitted");});
+it("records audit events",()=>{const s=new WorkflowService();schedule(s);expect(s.auditTrail().some(e=>e.action==="workflow.scheduled")).toBe(true);});
+it("serves dashboard and health endpoints",async()=>{const app=createApp();expect((await request(app).get("/health")).body.status).toBe("ok");expect((await request(app).get("/api/dashboard")).body.obligations).toBe(2);});
+it("schedules a workflow through API",async()=>{const app=createApp();const res=await request(app).post("/api/workflows").send({obligationCode:"UK-SAMPLE-001",period:"2026-Q4",dueDate:"2026-12-15"});expect(res.status).toBe(201);expect(res.body.tasks).toHaveLength(8);});
+it("rejects malformed workflow requests",async()=>{expect((await request(createApp()).post("/api/workflows").send({period:"Q4"})).status).toBe(400);});
+it("returns workflow task lists",async()=>{const app=createApp();await request(app).post("/api/workflows").send({obligationCode:"UK-SAMPLE-001",period:"2026-Q4",dueDate:"2026-12-15"});expect((await request(app).get("/api/workflows")).body).toHaveLength(1);});
+it("rejects task updates for unknown run",()=>{const s=new WorkflowService();expect(()=>s.updateTask("missing","missing",{status:"completed"},"a")).toThrow("Workflow run not found");});
+});
