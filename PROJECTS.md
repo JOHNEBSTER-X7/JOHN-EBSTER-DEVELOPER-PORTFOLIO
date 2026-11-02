@@ -243,4 +243,4 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Path:** [projects/fintech/banking-zero-trust-network-security](./projects/fintech/banking-zero-trust-network-security/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate device trust assessments, SPIFFE-style workload identities, network segmentation policies, default-deny flow evaluation, and audit reporting.  
-**Status:** Prototype published; CI verification pending. All enforcement is simulated; no real network controls or device attestation are connected.
+**Status:** Prototype; 15 tests passed, TypeScript check and build passed in [GitHub Actions](https://github.com/JOHNEBSTER-X7/JOHN-EBSTER-DEVELOPER-PORTFOLIO/actions/runs/41406093641). All enforcement is simulated; no real network controls or device attestation are connected.
