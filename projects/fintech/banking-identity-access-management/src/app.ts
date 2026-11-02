@@ -1,0 +1,26 @@
+import express from "express";
+import {z} from "zod";
+import {IdentityService} from "./service";
+const roles=z.array(z.enum(["customer","analyst","operator","approver","security_admin","auditor"]));
+const perms=z.array(z.enum(["profile:read","profile:write","payment:read","payment:approve","user:manage","policy:manage","audit:read","key:manage"]));
+const actor=(q:express.Request)=>q.header("x-actor")??"api-client";
+export function createApp(service:IdentityService){const app=express();app.use(express.json({limit:"1mb"}));
+app.get("/health",(_q,s)=>s.json({status:"ok",service:"northstar-banking-identity-access"}));
+app.get("/api/summary",(_q,s)=>s.json(service.summary()));
+app.get("/api/users",(_q,s)=>s.json(service.listUsers()));
+app.post("/api/users",(q,s)=>{const p=z.object({username:z.string().min(3),email:z.string().email(),displayName:z.string().min(2),password:z.string().min(12),roles:roles.min(1)}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.createUser(p.data,actor(q)));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.patch("/api/users/:id/status",(q,s)=>{const p=z.object({status:z.enum(["active","suspended","disabled"])}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.setStatus(q.params.id,p.data.status,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.post("/api/auth/login",(q,s)=>{const p=z.object({username:z.string(),password:z.string()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.authenticate(p.data.username,p.data.password));}catch(e){return s.status(401).json({error:(e as Error).message});}});
+app.post("/api/auth/logout",(q,s)=>{const token=q.header("authorization")?.replace(/^Bearer\s+/i,"");if(!token)return s.status(401).json({error:"Bearer token required"});try{return s.json(service.revokeSession(token,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.patch("/api/users/:id/mfa",(q,s)=>{const p=z.object({enabled:z.boolean()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.setMfaEnabled(q.params.id,p.data.enabled,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.get("/api/policies",(_q,s)=>s.json(service.listPolicies()));
+app.post("/api/policies",(q,s)=>{const p=z.object({name:z.string().min(2),role:z.enum(["customer","analyst","operator","approver","security_admin","auditor"]),permissions:perms.min(1),resourcePrefix:z.string().min(1),enabled:z.boolean().default(true)}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.status(201).json(service.addPolicy(p.data,actor(q)));});
+app.post("/api/authorize",(q,s)=>{const p=z.object({userId:z.string(),permission:z.enum(["profile:read","profile:write","payment:read","payment:approve","user:manage","policy:manage","audit:read","key:manage"]),resource:z.string()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.json(service.authorize(p.data.userId,p.data.permission,p.data.resource));});
+app.get("/api/role-approvals",(_q,s)=>s.json(service.listApprovals()));
+app.post("/api/role-approvals",(q,s)=>{const p=z.object({requesterId:z.string(),targetUserId:z.string(),roles:roles.min(1),reason:z.string().min(5)}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.requestRoleChange(p.data));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.patch("/api/role-approvals/:id",(q,s)=>{const p=z.object({decision:z.enum(["approved","rejected"]),approverId:z.string()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.decideRoleChange(q.params.id,p.data.decision,p.data.approverId));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.get("/api/api-keys",(_q,s)=>s.json(service.listApiKeys()));
+app.post("/api/api-keys",(q,s)=>{const p=z.object({userId:z.string(),label:z.string().min(2),scopes:perms.min(1),expiresAt:z.string()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.createApiKey(p.data,actor(q)));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.post("/api/api-keys/verify",(q,s)=>{const p=z.object({secret:z.string(),permission:z.enum(["profile:read","profile:write","payment:read","payment:approve","user:manage","policy:manage","audit:read","key:manage"])}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.json(service.verifyApiKey(p.data.secret,p.data.permission));});
+app.delete("/api/api-keys/:id",(q,s)=>{try{return s.json(service.revokeApiKey(q.params.id,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.get("/api/audit",(_q,s)=>s.json(service.getAudit()));return app;}
