@@ -223,3 +223,10 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate role-, dataset-, action- and purpose-scoped access policies, consent records, retention and legal-hold checks, sensitive-field masking, privacy request workflows, access approvals, security incident response and audit events.  
 **Status:** Prototype published; 18 automated tests, TypeScript check and production build passed in GitHub Actions. In-memory demonstration only; no authentication, real infrastructure enforcement, cryptographic protection, automatic erasure or regulatory certification.
+
+
+### Northstar Institutional Banking Identity & Access Management
+**Path:** [projects/fintech/banking-identity-access-management](./projects/fintech/banking-identity-access-management/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate user lifecycle, scrypt password hashing, expiring/revocable sessions, role permissions, resource-scoped policies, maker-checker role approvals, scoped API keys and audit events.  
+**Status:** Prototype implementation committed; CI verification pending. In-memory demo; MFA is an enforcement flag only and administrative routes are not protected by authentication middleware.
