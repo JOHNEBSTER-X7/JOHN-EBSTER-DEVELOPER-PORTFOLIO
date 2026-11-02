@@ -256,4 +256,4 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Path:** [projects/fintech/banking-regulatory-reporting-compliance-intelligence](./projects/fintech/banking-regulatory-reporting-compliance-intelligence/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate obligation registers, jurisdiction/entity mapping, reporting schedules, report validation, maker-checker approvals, submission lifecycle, regulatory-change assessments, dashboard metrics and audit trails.  
-**Status:** Prototype published; CI verification pending. Seed obligations are synthetic; submission is a local state transition only.
+**Status:** Prototype published; 17 automated tests, TypeScript check and production build passed in [GitHub Actions](https://github.com/JOHNEBSTER-X7/JOHN-EBSTER-DEVELOPER-PORTFOLIO/actions/runs/41407299324). Seed obligations are synthetic; submission is a local state transition only.
