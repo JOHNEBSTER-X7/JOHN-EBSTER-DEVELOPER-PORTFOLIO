@@ -1,0 +1,1 @@
+import {createApp} from "./app";import {createDemoWarehouse} from "./service";const port=Number(process.env.PORT??3810);createApp(createDemoWarehouse()).listen(port,()=>console.log(`Northstar Banking Warehouse listening on ${port}`));
