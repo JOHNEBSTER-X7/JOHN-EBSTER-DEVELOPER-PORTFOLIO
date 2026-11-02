@@ -216,3 +216,10 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest  
 **Goal:** Govern banking dataset metadata, ownership, stewards, versioned schemas, quality rules, validation findings, remediation issues, lineage and audit.  
 **Status:** Prototype published; 12 automated tests, TypeScript check and production build passed in GitHub Actions. In-memory state; no live integrations, access enforcement or regulatory certification.
+
+
+### Northstar Institutional Banking Data Security & Privacy Management
+**Path:** [projects/fintech/banking-data-security-privacy-platform](./projects/fintech/banking-data-security-privacy-platform/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate role-, dataset-, action- and purpose-scoped access policies, consent records, retention and legal-hold checks, sensitive-field masking, privacy request workflows, access approvals, security incident response and audit events.  
+**Status:** Prototype implementation committed; CI verification pending. In-memory demonstration only; no authentication, real infrastructure enforcement, cryptographic protection, automatic erasure or regulatory certification.
