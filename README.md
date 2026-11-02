@@ -17,6 +17,8 @@ A practical engineering portfolio documenting projects in full-stack development
 
 ## Selected projects
 
+| [Northstar Banking Security Operations & Threat Intelligence](./projects/fintech/banking-security-operations-threat-intelligence/) | TypeScript / Express / security operations | Prototype published; CI verification pending |
+
 | Project | Area | Status |
 |---|---|---|
 | [Three-of-Five Multisignature Wallet](./projects/web3/three-of-five-multisig/) | Solidity / Web3 security | Educational prototype; GitHub Actions compile and test workflow passed |
