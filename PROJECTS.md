@@ -249,4 +249,4 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Path:** [projects/fintech/banking-security-compliance-grc](./projects/fintech/banking-security-compliance-grc/)  
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate banking security control libraries, risk scoring, evidence review, audit planning, findings remediation and framework coverage reporting.  
-**Status:** Prototype published; CI verification pending. Framework mappings are illustrative and do not establish compliance or certification.
+**Status:** Prototype; 18 tests passed, TypeScript check and build passed in [GitHub Actions](https://github.com/JOHNEBSTER-X7/JOHN-EBSTER-DEVELOPER-PORTFOLIO/actions/runs/41406450117). Framework mappings are illustrative and do not establish compliance or certification.
