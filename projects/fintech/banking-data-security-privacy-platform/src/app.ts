@@ -1,0 +1,26 @@
+import express from "express";
+import {z} from "zod";
+import {PrivacyService} from "./service";
+const action=z.enum(["read","write","export","delete"]);
+const actor=(q:express.Request)=>q.header("x-actor")??"api-client";
+export function createApp(service:PrivacyService){const app=express();app.use(express.json({limit:"1mb"}));
+app.get("/health",(_q,s)=>s.json({status:"ok",service:"northstar-banking-data-security-privacy"}));
+app.get("/api/summary",(_q,s)=>s.json(service.summary()));
+app.get("/api/policies",(_q,s)=>s.json(service.listPolicies()));
+app.post("/api/policies",(q,s)=>{const p=z.object({name:z.string().min(2),datasetId:z.string().min(1),roles:z.array(z.string().min(1)).min(1),actions:z.array(action).min(1),purpose:z.string().min(2),enabled:z.boolean().default(true)}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.addPolicy(p.data,actor(q)));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.post("/api/access/evaluate",(q,s)=>{const p=z.object({role:z.string(),datasetId:z.string(),action,purpose:z.string()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.json(service.evaluateAccess(p.data));});
+app.post("/api/consents",(q,s)=>{const p=z.object({subjectId:z.string(),purpose:z.string(),granted:z.boolean(),expiresAt:z.string().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.recordConsent(p.data,actor(q)));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.get("/api/consents/check",(q,s)=>s.json({valid:service.checkConsent(String(q.query.subjectId??""),String(q.query.purpose??""))}));
+app.post("/api/retention",(q,s)=>{const p=z.object({datasetId:z.string(),purpose:z.string(),retentionDays:z.number().int().positive(),legalHold:z.boolean()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.status(201).json(service.setRetention(p.data,actor(q)));});
+app.post("/api/retention/eligibility",(q,s)=>{const p=z.object({datasetId:z.string(),createdAt:z.string(),now:z.string().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.retentionEligibility(p.data));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.post("/api/masking",(q,s)=>{const p=z.object({record:z.record(z.unknown()),sensitiveFields:z.array(z.string())}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.json({record:service.maskRecord(p.data.record,p.data.sensitiveFields)});});
+app.get("/api/privacy-requests",(_q,s)=>s.json(service.listPrivacyRequests()));
+app.post("/api/privacy-requests",(q,s)=>{const p=z.object({subjectId:z.string(),type:z.enum(["access","rectification","erasure","restriction","portability"])}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.createPrivacyRequest(p.data,actor(q)));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.patch("/api/privacy-requests/:id",(q,s)=>{const p=z.object({status:z.enum(["received","identity_verified","in_progress","fulfilled","rejected"]),note:z.string().default("")}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.updatePrivacyRequest(q.params.id,p.data.status,p.data.note,actor(q)));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.get("/api/access-requests",(_q,s)=>s.json(service.listAccessRequests()));
+app.post("/api/access-requests",(q,s)=>{const p=z.object({requester:z.string(),datasetId:z.string(),action,purpose:z.string()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.requestAccess(p.data,actor(q)));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.patch("/api/access-requests/:id",(q,s)=>{const p=z.object({decision:z.enum(["approved","rejected"]),decidedBy:z.string(),expiresAt:z.string().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.decideAccess(q.params.id,p.data.decision,p.data.decidedBy,p.data.expiresAt));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.get("/api/incidents",(_q,s)=>s.json(service.listIncidents()));
+app.post("/api/incidents",(q,s)=>{const p=z.object({title:z.string().min(2),severity:z.enum(["low","medium","high","critical"]),description:z.string()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.status(201).json(service.createIncident(p.data,actor(q)));});
+app.patch("/api/incidents/:id",(q,s)=>{const p=z.object({status:z.enum(["open","investigating","contained","closed"])}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.updateIncident(q.params.id,p.data.status,actor(q)));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.get("/api/audit",(_q,s)=>s.json(service.getAudit()));return app;}
