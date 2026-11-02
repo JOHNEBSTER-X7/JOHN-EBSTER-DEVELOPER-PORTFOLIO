@@ -1,0 +1,5 @@
+# Production readiness assessment
+
+Not production-ready. Before any real banking deployment, add: authenticated OIDC/SAML identity and enforced RBAC; durable, encrypted storage; tenant isolation; ingestion authentication and signed source identities; message-broker buffering and replay; schema versioning; clock-skew handling; rule testing/versioning/approval; indicator expiry and provenance validation; alert routing and escalation; case evidence integrity; immutable audit retention; secrets/key management; rate limiting and abuse controls; observability, backup/restore and disaster recovery; privacy/data-retention controls; threat modelling, penetration testing and independent security review.
+
+The current audit trail is mutable in-memory state. The event API accepts caller-supplied source labels and is not authenticated. No live threat feed, endpoint telemetry, vulnerability scanner, cloud SIEM or SOAR integration is present.
