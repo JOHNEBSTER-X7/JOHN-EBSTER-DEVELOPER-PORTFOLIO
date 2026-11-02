@@ -1,0 +1,22 @@
+import express from "express";
+import {z} from "zod";
+import {ZeroTrustService} from "./service";
+const zone=z.enum(["internet","dmz","application","database","admin","third_party"]);
+const actor=(q:express.Request)=>q.header("x-actor")??"api-client";
+export function createApp(service:ZeroTrustService){const app=express();app.use(express.json({limit:"1mb"}));
+app.get("/health",(_q,s)=>s.json({status:"ok",service:"northstar-banking-zero-trust"}));
+app.get("/api/summary",(_q,s)=>s.json(service.summary()));
+app.get("/api/devices",(_q,s)=>s.json(service.listDevices()));
+app.post("/api/devices",(q,s)=>{const p=z.object({name:z.string().min(2),owner:z.string().min(2),managed:z.boolean(),compliant:z.boolean()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.status(201).json(service.registerDevice(p.data));});
+app.patch("/api/devices/:id/assessment",(q,s)=>{const p=z.object({managed:z.boolean(),compliant:z.boolean()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.assessDevice(q.params.id,{...p.data,actor:actor(q)}));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.get("/api/service-identities",(_q,s)=>s.json(service.listServiceIdentities()));
+app.post("/api/service-identities",(q,s)=>{const p=z.object({name:z.string().min(2),spiffeId:z.string().startsWith("spiffe://"),zone}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.registerService(p.data));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.patch("/api/service-identities/:id",(q,s)=>{const p=z.object({active:z.boolean()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.setServiceIdentityStatus(q.params.id,p.data.active,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.get("/api/policies",(_q,s)=>s.json(service.listPolicies()));
+app.post("/api/policies",(q,s)=>{const p=z.object({name:z.string().min(2),sourceZone:zone,destinationZone:zone,serviceIdentityId:z.string().optional(),deviceRequired:z.boolean(),minimumTrust:z.number().min(0).max(100),ports:z.array(z.number().int().min(1).max(65535)).min(1),decision:z.enum(["allow","deny"]),reason:z.string().min(3)}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.status(201).json(service.addPolicy(p.data));}catch(e){return s.status(400).json({error:(e as Error).message});}});
+app.patch("/api/policies/:id",(q,s)=>{const p=z.object({enabled:z.boolean()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});try{return s.json(service.setPolicyEnabled(q.params.id,p.data.enabled,actor(q)));}catch(e){return s.status(404).json({error:(e as Error).message});}});
+app.post("/api/flows/evaluate",(q,s)=>{const p=z.object({sourceZone:zone,destinationZone:zone,source:z.string().min(1),destination:z.string().min(1),port:z.number().int().min(1).max(65535),protocol:z.enum(["tcp","udp"]),deviceId:z.string().optional(),serviceIdentityId:z.string().optional()}).safeParse(q.body);if(!p.success)return s.status(400).json({error:p.error.flatten()});return s.json(service.evaluateFlow(p.data));});
+app.get("/api/flows",(_q,s)=>s.json(service.listFlows()));
+app.get("/api/segmentation/matrix",(_q,s)=>s.json(service.simulateSegmentationCheck()));
+app.get("/api/audit",(_q,s)=>s.json(service.auditTrail()));
+return app;}
