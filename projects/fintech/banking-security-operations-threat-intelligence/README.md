@@ -28,3 +28,5 @@ This is a demonstration system using in-memory storage and synthetic/manual inpu
 
 ## Verification
 Automated tests and GitHub Actions verify the implemented prototype. Passing CI does not constitute a security audit or production-readiness assessment.
+
+CI workflow: [Banking Security Operations CI](../../.github/workflows/banking-security-operations-ci.yml).
