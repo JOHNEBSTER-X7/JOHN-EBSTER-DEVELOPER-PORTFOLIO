@@ -244,3 +244,9 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate device trust assessments, SPIFFE-style workload identities, network segmentation policies, default-deny flow evaluation, and audit reporting.  
 **Status:** Prototype; 15 tests passed, TypeScript check and build passed in [GitHub Actions](https://github.com/JOHNEBSTER-X7/JOHN-EBSTER-DEVELOPER-PORTFOLIO/actions/runs/41406093641). All enforcement is simulated; no real network controls or device attestation are connected.
+
+### Northstar Institutional Banking Security Compliance, GRC & Regulatory Controls
+**Path:** [projects/fintech/banking-security-compliance-grc](./projects/fintech/banking-security-compliance-grc/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate banking security control libraries, risk scoring, evidence review, audit planning, findings remediation and framework coverage reporting.  
+**Status:** Prototype published; CI verification pending. Framework mappings are illustrative and do not establish compliance or certification.
