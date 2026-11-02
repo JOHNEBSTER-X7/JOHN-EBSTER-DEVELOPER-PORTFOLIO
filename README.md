@@ -17,7 +17,7 @@ A practical engineering portfolio documenting projects in full-stack development
 
 ## Selected projects
 
-| [Northstar Banking Security Operations & Threat Intelligence](./projects/fintech/banking-security-operations-threat-intelligence/) | TypeScript / Express / security operations | Prototype published; CI verification pending |
+| [Northstar Banking Security Operations & Threat Intelligence](./projects/fintech/banking-security-operations-threat-intelligence/) | TypeScript / Express / security operations | Prototype; 14 CI tests passed; TypeScript check and build passed |
 
 | Project | Area | Status |
 |---|---|---|
