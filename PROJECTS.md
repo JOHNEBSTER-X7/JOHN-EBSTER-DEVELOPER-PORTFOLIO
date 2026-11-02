@@ -210,3 +210,9 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Consolidate canonical banking records into executive, payments, treasury, fraud/AML, reconciliation and operational reports, with data-quality checks, source lineage, audit and CSV/JSON exports.  
 **Status:** Prototype published; 17 automated tests, TypeScript check and production build passed in GitHub Actions. Synthetic fixtures only; no live integrations, durable warehouse, official regulatory returns or production access controls.
+
+### Northstar Institutional Banking Data Governance, Metadata & Data Quality
+**Path:** [projects/fintech/banking-data-governance-platform](./projects/fintech/banking-data-governance-platform/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest  
+**Goal:** Govern banking dataset metadata, ownership, stewards, versioned schemas, quality rules, validation findings, remediation issues, lineage and audit.  
+**Status:** Prototype published; CI verification pending. In-memory state; no live integrations, access enforcement or regulatory certification.
