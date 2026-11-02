@@ -1,0 +1,26 @@
+name: Banking Security Operations CI
+on:
+  push:
+    paths:
+      - 'projects/fintech/banking-security-operations-threat-intelligence/**'
+      - '.github/workflows/banking-security-operations-ci.yml'
+  pull_request:
+    paths:
+      - 'projects/fintech/banking-security-operations-threat-intelligence/**'
+      - '.github/workflows/banking-security-operations-ci.yml'
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/fintech/banking-security-operations-threat-intelligence
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run build
