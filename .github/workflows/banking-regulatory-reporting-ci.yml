@@ -1,0 +1,28 @@
+name: Regulatory Reporting CI
+on:
+  push:
+    paths:
+      - 'projects/fintech/banking-regulatory-reporting-compliance-intelligence/**'
+      - '.github/workflows/banking-regulatory-reporting-ci.yml'
+  pull_request:
+    paths:
+      - 'projects/fintech/banking-regulatory-reporting-compliance-intelligence/**'
+      - '.github/workflows/banking-regulatory-reporting-ci.yml'
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/fintech/banking-regulatory-reporting-compliance-intelligence
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: projects/fintech/banking-regulatory-reporting-compliance-intelligence/package.json
+      - run: npm install
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run build
