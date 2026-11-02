@@ -257,3 +257,10 @@ Status: Prototype published; 23 automated tests, TypeScript check and build pass
 **Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
 **Goal:** Demonstrate obligation registers, jurisdiction/entity mapping, reporting schedules, report validation, maker-checker approvals, submission lifecycle, regulatory-change assessments, dashboard metrics and audit trails.  
 **Status:** Prototype published; 17 automated tests, TypeScript check and production build passed in [GitHub Actions](https://github.com/JOHNEBSTER-X7/JOHN-EBSTER-DEVELOPER-PORTFOLIO/actions/runs/41407299324). Seed obligations are synthetic; submission is a local state transition only.
+
+
+### Northstar Institutional Banking Regulatory Data Validation, Reconciliation & Submission Controls
+**Path:** [projects/fintech/banking-regulatory-data-validation-reconciliation](./projects/fintech/banking-regulatory-data-validation-reconciliation/)  
+**Stack:** TypeScript, Node.js, Express, Zod, Vitest, Supertest  
+**Goal:** Demonstrate configurable validation rules, exception management, cross-source reconciliation with tolerance thresholds, submission-readiness gates and audit events.  
+**Status:** Prototype published; CI verification in progress. Synthetic/demo data only; no live regulatory submission.
