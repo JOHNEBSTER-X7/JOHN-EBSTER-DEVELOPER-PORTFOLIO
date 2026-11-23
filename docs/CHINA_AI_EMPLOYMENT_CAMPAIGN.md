@@ -221,3 +221,46 @@ For employment exceeding 90 days, the central government guide states that the f
 - [ ] Interviews and offers received.
 
 No recruiter has been contacted, no candidate registration has been submitted, and no job application or visa sponsorship is confirmed by this document.
+
+
+## Updated CV portfolio and evidence review — 23 November 2026
+
+Five English-language CV variants have been prepared for targeted use:
+1. AI Application & AI Agent Developer
+2. LLM, RAG & AI Systems Developer
+3. Full-Stack & Backend Software Developer
+4. Technical Product Manager / AI Solutions Lead
+5. FinTech, Blockchain & Payments Technology Specialist
+
+Each version is supplied as editable DOCX and PDF. The candidate should send only the version aligned to a specific vacancy and tailor its opening profile and skills to the advert.
+
+### Stronger GitHub evidence verified for the CVs
+
+- **Northstar Enterprise Research & Intelligence:** TypeScript/Express prototype combining uploaded PDF/TXT/Markdown ingestion, lexical retrieval, optional Tavily web search, source registers, research reports and Markdown export. Portfolio README records 12 CI tests, type-check and build passed. The README also states that uploaded files and reports are held in process memory, with no authentication, tenant isolation or durable database.
+- **Northstar Document Intelligence — RAG:** Python/FastAPI retrieval-first prototype supporting document upload, extraction, overlapping chunking, SQLite indexing and passage retrieval with document/page references. Portfolio README records 9 CI tests passed. It does not use embeddings or generate LLM-written answers; authentication and production document security are not included.
+- **ORIOM7:** repository documentation describes PostgreSQL lexical search, optional external search integration, optional pgvector semantic retrieval, reciprocal-rank fusion, a research workspace, evidence-linked knowledge graph and a durable asynchronous research-agent worker with planner, retriever and synthesiser stages. The specialist stages run sequentially in one worker process, not as independently deployed agents. Production deployment, provider configuration, worker supervision and semantic claim-to-source verification remain unverified or outstanding.
+
+These are portfolio/repository claims and test-status statements, not independent third-party audits. Do not describe prototypes as production services, or imply that optional/configurable components are live without deployment evidence.
+
+### Updated recruiter deployment pack
+
+- Five targeted CV variants (DOCX and PDF).
+- Recruiter introduction and candidate profile.
+- Screening questions covering Mandarin, direct employment, salary, work-permit/Z-visa sponsorship and relocation.
+- CSV recruitment tracker.
+
+### Agency screening and submission safeguards
+
+Yike International's published site describes bilingual candidate support and in-house work-permit, visa and residence-permit handling. HiredChina advertises international-executive recruitment and work-visa services. These are agency claims; verify the specific service, employer, vacancy, privacy terms and fee arrangements directly before relying on them.
+
+Do not send passport scans, police certificates, bank details or original degree documents at initial enquiry stage. Do not pay an intermediary for a guaranteed job or visa. No agency registration, recruiter contact or job application has been submitted as part of preparing this portfolio.
+
+### Revised execution checklist
+
+- [x] Five targeted CVs prepared in DOCX and PDF.
+- [x] AI project claims checked against public GitHub README and technical documentation.
+- [x] Recruiter introduction and screening questions prepared.
+- [x] Recruitment tracker prepared.
+- [ ] Candidate reviews and approves contact details, dates, project status and each CV.
+- [ ] Candidate authorises external agency contact or submits registrations directly.
+- [ ] Individual vacancies screened for English-language suitability, seniority, location and written sponsorship confirmation.
