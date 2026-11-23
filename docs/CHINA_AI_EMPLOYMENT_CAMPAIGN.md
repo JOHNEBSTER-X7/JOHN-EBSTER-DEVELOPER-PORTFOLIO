@@ -161,3 +161,63 @@ John Ebster-Davids
 - Do not expose private repositories, source code, credentials, API keys, customer data or confidential DRAGO X information to recruiters.
 - Share public project links and a tailored CV; provide private demonstrations only after checking that no confidential material is exposed.
 - Verify recruiter identity and never pay an intermediary for a guaranteed job or visa.
+
+
+## Recruiter targets — verified public contact routes
+
+### 1. HiredChina / Nstarts International Talents Group
+- Website: https://www.hiredchina.com/en/
+- About and company information: https://www.hiredchina.com/en/about
+- Candidate positioning: international talent recruitment for Chinese employers; its published company profile lists offices across Shenzhen, Guangzhou, Shanghai and Beijing and says it works with major employers including Tencent, ByteDance, Alibaba, Xiaomi and others.
+- Action: create a candidate profile, search current technology vacancies and send the recruiter introduction above. Ask specifically for mainland China AI application, LLM integration, RAG, Python backend and fintech AI roles open to UK-based applicants.
+- Verification caveat: stated client relationships do not mean those clients currently have a matching vacancy or will sponsor this candidate.
+
+### 2. Yike International Human Resources (Tianjin)
+- Website: https://www.yikerenli.com/
+- Candidate registration: https://www.yikerenli.com/apply
+- Published contact emails: hr@yikerenli.com; talent@yikerenli.com
+- Published phone / WeChat: +86 133 0205 7351; +86 133 8993 7351; +86 133 8995 7351
+- Its website describes bilingual Chinese-English candidate support and an in-house team handling work permits, visas and residence permits.
+- Action: register with a tailored CV and contact the consultant. Ask for AI/software engineering vacancies in Tianjin and other cities, and whether the agency can match candidates outside Tianjin.
+- Privacy: do not upload passport, police certificate or degree documents until the agency's identity, privacy terms, role and necessity of each document have been checked.
+
+## Current vacancy intelligence — checked 23 November 2026
+
+The Alion China AI vacancy index reported 8,634 AI/ML postings across 1,120 companies in its 18 November 2026 rebuild. It listed substantial posting volumes at ByteDance, Alibaba Group, Tencent, Baidu, Meituan, Xiaohongshu, iFlytek, Ant Group and Xiaomi. This is an aggregator snapshot, not a guarantee that every vacancy is still open, English-speaking or willing to sponsor a UK applicant.
+
+Source: https://alion.io/ai-jobs/china
+
+The sampled listing details show why each advert needs individual screening:
+- A Sunwoda AI platform backend role in Shenzhen listed Milvus, Elasticsearch, Redis, PostgreSQL, ONNX Runtime and Kubernetes, but specified Chinese C1.
+- An Alibaba Qwen AI-agent algorithm role listed RAG, LLMs, function calling and post-training methods, but specified senior level and Chinese C1.
+- These examples are useful skill signals, but they are not recommended applications unless language and seniority requirements are met.
+
+Other index pages for targeted searches:
+- LLM and generative AI roles: https://alion.io/ai-jobs/china/llm-and-genai
+- Backend developer roles: https://alion.io/backend-developer-jobs/china
+
+**Immediate vacancy-search filter:** full-time; mainland China; Python / TypeScript / AI application / RAG / agent integration / backend; English working language or Mandarin not required; overseas applicants accepted; foreign work-permit sponsorship explicitly confirmed by employer. Treat aggregator nationality labels as screening clues only, not proof of immigration eligibility.
+
+## Work-permit process — official guidance
+
+For employment exceeding 90 days, the central government guide states that the foreign employee should obtain the Foreigner's Work Permit Notification before applying for the Z visa, then apply for the work-type residence permit after entry. The employer is responsible for the relevant work-permit application process. Confirm the latest city-specific requirements before travel.
+
+- Central government guide: https://english.www.gov.cn/2025special/bizexpatsinchina2025/
+- Shanghai work-permit guide: https://english.shanghai.gov.cn/en-WorkPermit/index.html
+- Shanghai Z-visa guidance: https://english.shanghai.gov.cn/en-ApplyWorkVisa/20231217/179cf1460b68430abe151852aa9de2dd.html
+- Shenzhen foreign work-permit guidance: https://www.sz.gov.cn/en_szgov/services/enterprise/employment/index.html
+
+## Campaign execution status — 23 November 2026
+
+- [x] GitHub campaign brief created on branch `china-ai-employment-campaign`.
+- [x] Draft PR #1 opened against `main`.
+- [x] Public recruiter contact routes verified for HiredChina and Yike International.
+- [x] Current China AI vacancy market snapshot reviewed.
+- [ ] Candidate CV and supporting credentials finalised for China applications.
+- [ ] Candidate profile submitted to HiredChina.
+- [ ] Candidate profile submitted to Yike International.
+- [ ] Individual employer vacancies screened for language, location, seniority and sponsorship.
+- [ ] Employer applications submitted.
+- [ ] Interviews and offers received.
+
+No recruiter has been contacted, no candidate registration has been submitted, and no job application or visa sponsorship is confirmed by this document.
