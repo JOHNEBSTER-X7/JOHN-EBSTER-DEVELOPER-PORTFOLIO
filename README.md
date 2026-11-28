@@ -17,6 +17,8 @@ A practical engineering portfolio documenting projects in full-stack development
 
 ## Selected projects
 
+| [DRAGO X QUANT HYPERFABRIC — Sanitised Technical Case Study](./projects/quant/drago-x-quant-hyperfabric/) | Python / C++ / Rust / FIX 4.4 / quantitative infrastructure | Public technical overview; implementation repository remains private; reference implementation, not live exchange-connected |
+
 | [Northstar Banking Security Operations & Threat Intelligence](./projects/fintech/banking-security-operations-threat-intelligence/) | TypeScript / Express / security operations | Prototype; 14 CI tests passed; TypeScript check and build passed |
 | [Northstar Banking Zero Trust Network Security](./projects/fintech/banking-zero-trust-network-security/) | TypeScript / Express / network security | Prototype; 15 CI tests passed; TypeScript check and build passed |
 | [Northstar Banking Security Compliance GRC](./projects/fintech/banking-security-compliance-grc/) | TypeScript / Express / GRC | Prototype; 18 CI tests passed; TypeScript check and build passed |
