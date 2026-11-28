@@ -2,6 +2,14 @@
 
 This index distinguishes working software from planned work. Status labels are deliberately conservative.
 
+## Quantitative finance and market infrastructure
+
+### DRAGO X QUANT HYPERFABRIC — Sanitised Technical Case Study
+**Path:** [projects/quant/drago-x-quant-hyperfabric](./projects/quant/drago-x-quant-hyperfabric/)  
+**Stack:** Python, C++, Rust, FIX 4.4, SQLite, GitHub Actions  
+**Goal:** Document a modular reference architecture for market-data validation, deterministic replay, order-book reconstruction, execution simulation, connectivity primitives and quantitative benchmarking.  
+**Status:** Public technical overview; underlying implementation repository is private. Reference implementation only. No live exchange connectivity, production order routing, independent certification or production performance claims are made.
+
 ## Web3 and smart contracts
 
 ### Three-of-Five Multisignature Wallet
