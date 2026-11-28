@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="980" viewBox="0 0 1600 980" role="img" aria-labelledby="title desc">
+<title id="title">DRAGO X QUANT HYPERFABRIC reference architecture</title>
+<desc id="desc">Sanitised conceptual architecture showing market data inputs, validation, event codec, distribution, market-state reconstruction, simulation, journal and replay, connectivity reference components, telemetry and reports.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#101827"/><stop offset="1" stop-color="#1d293b"/></linearGradient>
+  <linearGradient id="accent" x1="0" x2="1"><stop offset="0" stop-color="#d7a84b"/><stop offset="1" stop-color="#f1d18a"/></linearGradient>
+  <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#d7a84b"/></marker>
+  <style>
+    .h{font:700 34px Arial,sans-serif;fill:#fff}.sub{font:16px Arial,sans-serif;fill:#c4cedb}
+    .box{fill:#26364d;stroke:#6d829e;stroke-width:2;rx:16}.gold{fill:#352f25;stroke:#d7a84b;stroke-width:2;rx:16}
+    .t{font:700 20px Arial,sans-serif;fill:#fff}.s{font:15px Arial,sans-serif;fill:#d5deea}
+    .line{stroke:#d7a84b;stroke-width:3;fill:none;marker-end:url(#arrow)}
+    .note{font:14px Arial,sans-serif;fill:#b9c5d4}
+  </style>
+</defs>
+<rect width="1600" height="980" fill="url(#bg)"/>
+<text x="800" y="62" text-anchor="middle" class="h">DRAGO X QUANT HYPERFABRIC</text>
+<text x="800" y="94" text-anchor="middle" class="sub">SANITISED REFERENCE ARCHITECTURE · QH 1.9 SNAPSHOT</text>
+<rect x="80" y="145" width="1440" height="100" class="gold"/>
+<text x="800" y="185" text-anchor="middle" class="t">MARKET-DATA INPUTS</text>
+<text x="800" y="215" text-anchor="middle" class="s">Deterministic fixtures · JSONL / CSV · authorised future inputs (not currently live-connected)</text>
+<path d="M800 245 V285" class="line"/>
+<rect x="500" y="290" width="600" height="90" class="box"/>
+<text x="800" y="327" text-anchor="middle" class="t">FEED ADAPTER CONTRACTS &amp; GATEWAY</text>
+<text x="800" y="355" text-anchor="middle" class="s">Validation · entitlement gates · sequence checks</text>
+<path d="M800 380 V420" class="line"/>
+<rect x="500" y="425" width="600" height="85" class="box"/>
+<text x="800" y="460" text-anchor="middle" class="t">VERSIONED EVENT REPRESENTATION</text>
+<text x="800" y="488" text-anchor="middle" class="s">72-byte binary event codec · Python / C++ / Rust</text>
+<path d="M800 510 V555" class="line"/>
+<rect x="500" y="560" width="600" height="85" class="box"/>
+<text x="800" y="595" text-anchor="middle" class="t">MARKET-DATA DISTRIBUTION</text>
+<text x="800" y="623" text-anchor="middle" class="s">Bounded queues · native SPSC fan-out · overflow telemetry</text>
+<path d="M650 645 V690 H300 V730" class="line"/>
+<path d="M800 645 V730" class="line"/>
+<path d="M950 645 V690 H1300 V730" class="line"/>
+<rect x="90" y="735" width="420" height="125" class="gold"/>
+<text x="300" y="775" text-anchor="middle" class="t">JOURNAL &amp; REPLAY</text>
+<text x="300" y="808" text-anchor="middle" class="s">Local append-only journal</text>
+<text x="300" y="834" text-anchor="middle" class="s">Checksums · checkpoints · deterministic replay</text>
+<rect x="590" y="735" width="420" height="125" class="box"/>
+<text x="800" y="775" text-anchor="middle" class="t">MARKET-STATE ENGINE</text>
+<text x="800" y="808" text-anchor="middle" class="s">Venue / instrument order books</text>
+<text x="800" y="834" text-anchor="middle" class="s">Snapshot-led reconstruction · gap handling</text>
+<rect x="1090" y="735" width="420" height="125" class="box"/>
+<text x="1300" y="775" text-anchor="middle" class="t">CONNECTIVITY REFERENCES</text>
+<text x="1300" y="808" text-anchor="middle" class="s">FIX 4.4 · TCP / UDP foundations</text>
+<text x="1300" y="834" text-anchor="middle" class="s">Simulated counterparties · no live venue session</text>
+<path d="M800 860 V890" class="line"/>
+<rect x="250" y="895" width="1100" height="62" class="gold"/>
+<text x="800" y="933" text-anchor="middle" class="t">EXECUTION SIMULATION · BENCHMARKS · TELEMETRY · ENGINEERING REPORTS</text>
+<text x="800" y="970" text-anchor="middle" class="note">Conceptual component map; not a production deployment topology or live exchange connectivity diagram.</text>
+</svg>
