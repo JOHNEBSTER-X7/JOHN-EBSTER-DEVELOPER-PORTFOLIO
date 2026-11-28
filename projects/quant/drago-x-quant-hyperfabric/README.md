@@ -9,6 +9,9 @@
 
 ## 1. Project overview
 
+![DRAGO X QUANT HYPERFABRIC sanitised architecture](./architecture.svg)
+
+
 DRAGO X QUANT HYPERFABRIC is a modular research and engineering platform exploring the infrastructure required for reliable market-data processing, deterministic market-state reconstruction, execution simulation, venue connectivity and quantitative performance measurement.
 
 The engineering objective is to make market events traceable and reproducible while keeping the system modular across software runtimes and deployment environments.
